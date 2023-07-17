@@ -1,22 +1,62 @@
 import { Point } from '@taoro/math-point'
 import { Rect } from '@taoro/math-rect'
+import { ImageSheet } from '@taoro/image-sheet'
 import { ImageComponent } from '@taoro/renderer-2d'
 import { TransformComponent } from '@taoro/component-transform-2d'
+import { ColliderComponent } from '@taoro/collider-nano-2d'
+
+export const CatAnimation = {
+  DAMAGE: 'damage',
+  JUMP: 'jump',
+  WALK: 'walk',
+}
 
 /**
  * Cat.
  */
 export function* Cat(game) {
   const transform = new TransformComponent('cat', {
-    x: 100,
+    x: 400,
     y: 100,
     width: 32,
     height: 32,
   })
 
+  const collider = new ColliderComponent('cat', {
+    tag: 'cat',
+    collidesWithTag: 'box',
+  })
+
+  const gato = game.resources.get('images/gato.png')
+  const imageSheet = new ImageSheet(gato.width, gato.height, [
+    // calambrazo
+    new Rect(57, 1, 276, 295),
+    new Rect(484, 1, 276, 297),
+
+    // saltar
+    new Rect(875, 3, 368, 277),
+    new Rect(1352, 3, 368, 277),
+    new Rect(1849, 3, 406, 279),
+    new Rect(2336, 3, 432, 277),
+    new Rect(2835, 3, 431, 278),
+    new Rect(3301, 3, 383, 281),
+
+    // caminar
+    new Rect(3717, 2, 350, 281),
+    new Rect(4073, 2, 350, 281),
+    new Rect(4437, 2, 350, 281),
+    new Rect(4783, 2, 350, 281),
+    new Rect(5125, 2, 350, 281),
+    new Rect(5486, 2, 350, 281),
+    new Rect(5839, 2, 350, 281),
+    new Rect(6180, 2, 350, 281),
+  ])
+
+  console.log(imageSheet.rectOf(0))
+
   const image = new ImageComponent('cat', {
     source: game.resources.get('images/gato.png'),
-    rect: new Rect(0, 0, 400, 300),
+    rect: imageSheet.rectOf(0).clone(),
     pivot: new Point(-200, -150),
   })
 
@@ -28,13 +68,24 @@ export function* Cat(game) {
   const velocity = new Point(0, 0)
 
   let life = 100
-  let isJumping = false
+
+  let isJumping = true
   let isMeowing = false
-  let frameIndex = 0
+
+  // CatAnimation.WALK, 'jump' y 'damage'
+  const frameIndices = new Map([
+    [CatAnimation.DAMAGE, [0, 2]],
+    [CatAnimation.JUMP, [2, 8]],
+    [CatAnimation.WALK, [8, 16]]
+  ])
+  let frameAnimation = CatAnimation.JUMP
+  let frameIndex = 4
+  let currentRectIndex = 0
 
   while (life > 0) {
     if (game.input.stateOf(0, 'jump') && !isJumping) {
-      velocity.y -= 10
+      frameAnimation = CatAnimation.JUMP
+      frameIndex = 0
       isJumping = true
     }
 
@@ -54,24 +105,63 @@ export function* Cat(game) {
           onEnded: () => (isMeowing = false),
         }
       )
+      frameAnimation = CatAnimation.DAMAGE
+      frameIndex = 0
       isMeowing = true
     }
 
-    frameIndex += Math.abs(velocity.x) / 50
+    if (frameAnimation === CatAnimation.WALK) {
+      frameIndex += 0.2
+    } else if (frameAnimation === CatAnimation.JUMP && isJumping) {
+      if (velocity.y === 0) {
+        frameIndex += 0.2
+        if (Math.floor(frameIndex) === 2) {
+          velocity.y -= 20
+        }
+      } else if (velocity.y >= -20 && velocity.y <= -10) {
+        frameIndex = 2
+      } else if (velocity.y >= -10 && velocity.y < 0) {
+        frameIndex = 3
+      } else if (velocity.y >= 0) {
+        frameIndex = 4
+      }
+    } else if (frameAnimation === CatAnimation.DAMAGE) {
+      frameIndex += 0.5
+    }
 
-    image.rect.x = (Math.floor(frameIndex) % 8) * 400
+    // image.rect.x = (Math.floor(frameIndex) % 8) * 400
 
     transform.position.x += velocity.x
     transform.position.y += velocity.y
+
     velocity.x *= 0.8
 
+    if (collider.hasCollided) {
+
+    }
+
     if (transform.position.y < game.viewport.currentHalfHeight) {
+      // Aplicamos la gravedad del juego.
       velocity.y += 0.8
-    } else {
+      if (isJumping && frameIndex >= 3 && transform.position.y > game.viewport.currentHalfHeight - 50) {
+        frameIndex = 5
+      }
+    } else if (transform.position.y >= game.viewport.currentHalfHeight) {
+      // El gato está en el suelo (su velocidad vertical es 0
+      // y su posición vertical es igual a la mitad de la altura de la pantalla).
       velocity.y = 0
       transform.position.y = game.viewport.currentHalfHeight
-      isJumping = false
+      if (isJumping && frameIndex >= 2) {
+        frameAnimation = CatAnimation.WALK
+        frameIndex = 0
+        isJumping = false
+      }
     }
+
+    const [startIndex, endIndex] = frameIndices.get(frameAnimation)
+    const count = endIndex - startIndex
+    currentRectIndex = startIndex + (Math.floor(frameIndex) % count)
+    image.rect.copy(imageSheet.rectOf(currentRectIndex))
 
     yield
   }

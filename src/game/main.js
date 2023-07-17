@@ -13,13 +13,15 @@ export default async function main(canvas) {
   game.resources.load('sounds/meow.wav?taoro:as=audiobuffer')
   game.resources.load('sounds/meowbrrr.wav?taoro:as=audiobuffer')
   game.resources.load('fonts/Corben/Corben-Regular.ttf?taoro:family=corben')
-  game.resources.load('images/cat1.png')
+  game.resources.load('images/gato.png')
   await game.resources.all()
 
+  // Añadimos el renderer al pipeline del juego.
   const renderer = new Renderer(canvas)
   game.pipeline.push(() => renderer.update())
 
-  game.input.setBindings(0, (state) => {
+  // Seteamos los bindings de los controles.
+  game.input.setBindings(0, () => {
     return [
       [
         'jump',
@@ -44,4 +46,10 @@ export default async function main(canvas) {
       ],
     ]
   })
+
+  // Añadimos el gato al juego.
+  game.scheduler.add(Cat(game))
+
+  // Arrancamos el juego.
+  game.start()
 }

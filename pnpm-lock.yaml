@@ -5,13 +5,28 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@taoro/collider-nano-2d':
+    specifier: ^1.0.0
+    version: 1.0.0
   '@taoro/component':
+    specifier: ^1.0.0
+    version: 1.0.0
+  '@taoro/component-transform-2d':
     specifier: ^1.0.0
     version: 1.0.0
   '@taoro/game':
     specifier: ^1.0.0
     version: 1.0.0
+  '@taoro/image-sheet':
+    specifier: ^1.0.2
+    version: 1.0.2
   '@taoro/input':
+    specifier: ^1.0.0
+    version: 1.0.0
+  '@taoro/math-point':
+    specifier: ^1.0.0
+    version: 1.0.0
+  '@taoro/math-rect':
     specifier: ^1.0.0
     version: 1.0.0
   '@taoro/renderer-2d':
@@ -287,6 +302,15 @@ packages:
     resolution: {integrity: sha512-IaWz3BxvHYj5q5nhRlShPCGwNxeVNtBteOPZmcQaOZBAxZ/5rrsRZN8ejfKz4YDDm6ZWnfaBJe5IImXR9bMSxQ==}
     dev: false
 
+  /@taoro/collider-nano-2d@1.0.0:
+    resolution: {integrity: sha512-PXVPXV8NtQoSAse0oP0gLhawPhGK0xVrZkO6DSDNVdDk0apEkaqOSV/ih3Nr4GaOoxlrzAsgqNd/wayKNvgckw==}
+    dependencies:
+      '@taoro/component': 1.0.0
+      '@taoro/component-transform-2d': 1.0.0
+      '@taoro/math-point': 1.0.0
+      '@taoro/math-rect': 1.0.0
+    dev: false
+
   /@taoro/component-transform-2d@1.0.0:
     resolution: {integrity: sha512-h9HWwRp1BQcP3mbx2VGqBBvLWXQD65pHOa/zWB+p8jmHV5RBVtvCP7iMc+5I0bR6j1h0u0KrID/C7zz9kuEbhQ==}
     dependencies:
@@ -328,6 +352,14 @@ packages:
       '@taoro/runnable': 1.0.0
       '@taoro/scheduler': 1.0.0
       '@taoro/viewport': 1.0.0
+    dev: false
+
+  /@taoro/image-sheet@1.0.2:
+    resolution: {integrity: sha512-PzxA9yJY83DxQEZPvaCv9W0lb3pFOm4ho+DYVHDRRQs2baf4avO2Nc/LIWf/PAehYny6fKRIClafcpSW2PT8Qw==}
+    dependencies:
+      '@taoro/canvas': 1.0.0
+      '@taoro/math-point': 1.0.0
+      '@taoro/math-rect': 1.0.0
     dev: false
 
   /@taoro/input-gamepads@1.0.0:

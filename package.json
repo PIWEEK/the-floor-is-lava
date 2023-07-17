@@ -9,9 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@taoro/collider-nano-2d": "^1.0.0",
     "@taoro/component": "^1.0.0",
+    "@taoro/component-transform-2d": "^1.0.0",
     "@taoro/game": "^1.0.0",
+    "@taoro/image-sheet": "^1.0.2",
     "@taoro/input": "^1.0.0",
+    "@taoro/math-point": "^1.0.0",
+    "@taoro/math-rect": "^1.0.0",
     "@taoro/renderer-2d": "^1.0.0",
     "vue": "^3.3.4"
   },
