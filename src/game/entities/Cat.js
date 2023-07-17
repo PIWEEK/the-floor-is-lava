@@ -1,7 +1,7 @@
 import { Point } from '@taoro/math-point'
 import { Rect } from '@taoro/math-rect'
 import { Component } from '@taoro/component'
-import { ImageSheet } from '@taoro/image-sheet'
+import { ImageSheet, ImageSheetRect } from '@taoro/image-sheet'
 import { TextComponent, RectComponent, ImageComponent } from '@taoro/renderer-2d'
 import { TransformComponent } from '@taoro/component-transform-2d'
 import { ColliderComponent } from '@taoro/collider-nano-2d'
@@ -19,8 +19,6 @@ export function* Cat(game) {
   const transform = new TransformComponent('cat', {
     x: 400,
     y: 100,
-    scaleX: 0.5,
-    scaleY: 0.5
   })
 
   const collider = new ColliderComponent('cat', {
@@ -29,38 +27,17 @@ export function* Cat(game) {
     collidesWithTag: 1,
   })
 
+  const gatoRects = game.resources.get('images/gato.json')
+    .map((rect) => new Rect(rect.x, rect.y, rect.width, rect.height))
   const gato = game.resources.get('images/gato.png')
-  const imageSheet = new ImageSheet(gato.width, gato.height, [
-    // calambrazo
-    new Rect(57, 1, 276, 295),
-    new Rect(484, 1, 276, 297),
-
-    // saltar
-    new Rect(875, 3, 368, 277),
-    new Rect(1352, 3, 368, 277),
-    new Rect(1849, 3, 406, 279),
-    new Rect(2336, 3, 432, 277),
-    new Rect(2835, 3, 431, 278),
-    new Rect(3301, 3, 383, 281),
-
-    // caminar
-    new Rect(3717, 2, 350, 281),
-    new Rect(4073, 2, 350, 281),
-    new Rect(4437, 2, 350, 281),
-    new Rect(4783, 2, 350, 281),
-    new Rect(5125, 2, 350, 281),
-    new Rect(5486, 2, 350, 281),
-    new Rect(5839, 2, 350, 281),
-    new Rect(6180, 2, 350, 281),
-  ])
-
-  console.log(imageSheet.rectOf(0))
+  const imageSheet = new ImageSheet(gato.width, gato.height, gatoRects)
 
   const image = new ImageComponent('cat', {
     source: game.resources.get('images/gato.png'),
-    rect: imageSheet.rectOf(0).clone(),
-    pivot: new Point(-200, -150),
+    rect: new Rect(),
+    pivot: new Point(-35, -35),
   })
+  image.rect.copy(imageSheet.rectOf(0))
 
   const text = new TextComponent('cat', {
     text: () => `${collider.collisions.size}`,

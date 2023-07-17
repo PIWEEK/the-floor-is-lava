@@ -30,8 +30,8 @@ dependencies:
     specifier: ^1.0.0
     version: 1.0.0
   '@taoro/renderer-2d':
-    specifier: ^1.0.0
-    version: 1.0.0
+    specifier: ^1.0.1
+    version: 1.0.1
   '@taoro/viewport':
     specifier: ^1.0.0
     version: 1.0.0
@@ -435,8 +435,8 @@ packages:
     resolution: {integrity: sha512-IfyjtxvrPQCa7/zULXFNjRYOtEUz9P4Mat+lKTvnirfQxSnr3/aviu5O45QZBkKS8bUvbrzzoLsSE7YvWMjuGQ==}
     dev: false
 
-  /@taoro/renderer-2d@1.0.0:
-    resolution: {integrity: sha512-IhD4+WAP9cuoaZE4DTBMN98gEY0AfJiha3i5RDbMu2R3Vm5pdIObiw13UQUV1UqPXGkQb9/B8Lnp8lWt400Tog==}
+  /@taoro/renderer-2d@1.0.1:
+    resolution: {integrity: sha512-VTu3mKc7jFda+tOmlIlOTYJlOYo3bhCW70D7CDJnDN4uWemBg98iFRZiT0VcLaq5AXxg+z5+Y0G74f+sxqupJg==}
     dependencies:
       '@taoro/component': 1.0.0
       '@taoro/component-transform-2d': 1.0.0

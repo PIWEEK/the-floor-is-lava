@@ -20,6 +20,7 @@ export default async function main(canvas) {
   game.resources.load('sounds/meow.wav?taoro:as=audiobuffer')
   game.resources.load('sounds/meowbrrr.wav?taoro:as=audiobuffer')
   game.resources.load('fonts/Corben/Corben-Regular.ttf?taoro:family=corben')
+  game.resources.load('images/gato.json')
   game.resources.load('images/gato.png')
   game.resources.load('levels/level01.json')
   await game.resources.all()

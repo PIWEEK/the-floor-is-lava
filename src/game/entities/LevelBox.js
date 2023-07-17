@@ -17,9 +17,9 @@ export function * LevelBox(game, levelRect, parentTransform) {
   })
 
   const rect = new RectComponent(id, {
+    rect: new Rect(0, 0, levelRect.width, levelRect.height),
     fillStyle: '#f0f'
   })
-  rect.rect.size.set(levelRect.width, levelRect.height)
 
   const text = new TextComponent(id, {
     text: () => `${transform.position.x}, ${transform.position.y}, ${collider.rect.x}, ${collider.rect.y}`,
@@ -33,8 +33,6 @@ export function * LevelBox(game, levelRect, parentTransform) {
   })
 
   while (true) {
-    //
-    // collider.rect.x = parentTransform.position.x + levelRect.x
     transform.position.x = parentTransform.position.x + levelRect.x
     yield // detente aquí hasta la siguiente actualización
   }

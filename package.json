@@ -17,7 +17,7 @@
     "@taoro/input": "^1.0.0",
     "@taoro/math-point": "^1.0.0",
     "@taoro/math-rect": "^1.0.0",
-    "@taoro/renderer-2d": "^1.0.0",
+    "@taoro/renderer-2d": "^1.0.1",
     "@taoro/viewport": "^1.0.0",
     "vue": "^3.3.4"
   },
