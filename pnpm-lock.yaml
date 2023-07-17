@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@taoro/collider-nano-2d':
-    specifier: ^1.0.0
-    version: 1.0.0
+    specifier: ^1.0.1
+    version: 1.0.1
   '@taoro/component':
     specifier: ^1.0.0
     version: 1.0.0
@@ -30,6 +30,9 @@ dependencies:
     specifier: ^1.0.0
     version: 1.0.0
   '@taoro/renderer-2d':
+    specifier: ^1.0.0
+    version: 1.0.0
+  '@taoro/viewport':
     specifier: ^1.0.0
     version: 1.0.0
   vue:
@@ -302,8 +305,8 @@ packages:
     resolution: {integrity: sha512-IaWz3BxvHYj5q5nhRlShPCGwNxeVNtBteOPZmcQaOZBAxZ/5rrsRZN8ejfKz4YDDm6ZWnfaBJe5IImXR9bMSxQ==}
     dev: false
 
-  /@taoro/collider-nano-2d@1.0.0:
-    resolution: {integrity: sha512-PXVPXV8NtQoSAse0oP0gLhawPhGK0xVrZkO6DSDNVdDk0apEkaqOSV/ih3Nr4GaOoxlrzAsgqNd/wayKNvgckw==}
+  /@taoro/collider-nano-2d@1.0.1:
+    resolution: {integrity: sha512-tjVAZqG9Ff/BUdaYADPZTSF1D1rW3mbtmLs+BFUoGvNSdmVilu1aXuUzKhVtBzwr+W436xUniH9FipYvpn2Iag==}
     dependencies:
       '@taoro/component': 1.0.0
       '@taoro/component-transform-2d': 1.0.0

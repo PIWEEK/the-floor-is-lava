@@ -1,7 +1,8 @@
 import { Point } from '@taoro/math-point'
 import { Rect } from '@taoro/math-rect'
+import { Component } from '@taoro/component'
 import { ImageSheet } from '@taoro/image-sheet'
-import { ImageComponent } from '@taoro/renderer-2d'
+import { TextComponent, RectComponent, ImageComponent } from '@taoro/renderer-2d'
 import { TransformComponent } from '@taoro/component-transform-2d'
 import { ColliderComponent } from '@taoro/collider-nano-2d'
 
@@ -18,13 +19,14 @@ export function* Cat(game) {
   const transform = new TransformComponent('cat', {
     x: 400,
     y: 100,
-    width: 32,
-    height: 32,
+    scaleX: 0.5,
+    scaleY: 0.5
   })
 
   const collider = new ColliderComponent('cat', {
-    tag: 'cat',
-    collidesWithTag: 'box',
+    rect: new Rect(0, 0, 100, 100),
+    tag: 0,
+    collidesWithTag: 1,
   })
 
   const gato = game.resources.get('images/gato.png')
@@ -59,6 +61,18 @@ export function* Cat(game) {
     rect: imageSheet.rectOf(0).clone(),
     pivot: new Point(-200, -150),
   })
+
+  const text = new TextComponent('cat', {
+    text: () => `${collider.collisions.size}`,
+    font: '24px corben',
+  })
+  text.pivot.set(200, 150)
+
+  const rect = new RectComponent('cat', {
+    fillStyle: '',
+    strokeStyle: '#f0f',
+  })
+  rect.rect.copy(collider.rect)
 
   game.sound.play(game.resources.get('sounds/meow.wav?taoro:as=audiobuffer'), {
     playbackRate: 1 + Math.random() * 0.5,
@@ -115,7 +129,7 @@ export function* Cat(game) {
     } else if (frameAnimation === CatAnimation.JUMP && isJumping) {
       if (velocity.y === 0) {
         frameIndex += 0.2
-        if (Math.floor(frameIndex) === 2) {
+        if (Math.floor(frameIndex) === 2 && velocity.y >= 0) {
           velocity.y -= 20
         }
       } else if (velocity.y >= -20 && velocity.y <= -10) {
@@ -136,11 +150,19 @@ export function* Cat(game) {
 
     velocity.x *= 0.8
 
-    if (collider.hasCollided) {
-
+    if (collider.hasCollided && velocity.y > 0) {
+      velocity.y = 0
+      const [collision] = collider.collisions
+      const collisionTransform = Component.findByIdAndConstructor(collision.id, TransformComponent)
+      transform.position.y = collisionTransform.position.y - collider.rect.height
+      if (isJumping && frameIndex >= 2) {
+        frameAnimation = CatAnimation.WALK
+        frameIndex = 0
+        isJumping = false
+      }
     }
 
-    if (transform.position.y < game.viewport.currentHalfHeight) {
+    if (!collider.hasCollided && transform.position.y < game.viewport.currentHalfHeight) {
       // Aplicamos la gravedad del juego.
       velocity.y += 0.8
       if (isJumping && frameIndex >= 3 && transform.position.y > game.viewport.currentHalfHeight - 50) {
