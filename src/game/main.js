@@ -16,6 +16,7 @@ export default async function main(canvas) {
   game.viewport.width = 1920
   game.viewport.height = 1080
 
+  game.resources.load('musics/ES_Cool Cat Alley - Alvaro Antin.mp3?taoro:as=audiobuffer')
   game.resources.load('sounds/meowch.wav?taoro:as=audiobuffer')
   game.resources.load('sounds/meow.wav?taoro:as=audiobuffer')
   game.resources.load('sounds/meowbrrr.wav?taoro:as=audiobuffer')
@@ -57,6 +58,9 @@ export default async function main(canvas) {
       ],
     ]
   })
+
+  game.music.a.buffer = game.resources.get('musics/ES_Cool Cat Alley - Alvaro Antin.mp3?taoro:as=audiobuffer')
+  game.music.a.start()
 
   // Añadimos el gato al juego.
   game.scheduler.add(Cat(game))

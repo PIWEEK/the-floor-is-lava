@@ -129,8 +129,8 @@ export function* Cat(game) {
 
     if (collider.hasCollided && velocity.y > 0) {
       velocity.y = 0
-      const [collision] = collider.collisions
-      const collisionTransform = Component.findByIdAndConstructor(collision.id, TransformComponent)
+      const [id] = collider.collisions
+      const collisionTransform = Component.findByIdAndConstructor(id, TransformComponent)
       transform.position.y = collisionTransform.position.y - collider.rect.height
       if (isJumping && frameIndex >= 2) {
         frameAnimation = CatAnimation.WALK

@@ -42,10 +42,10 @@ dependencies:
 devDependencies:
   '@vitejs/plugin-vue':
     specifier: ^4.2.3
-    version: 4.2.3(vite@4.4.0)(vue@3.3.4)
+    version: 4.2.3(vite@4.4.4)(vue@3.3.4)
   vite:
-    specifier: ^4.4.0
-    version: 4.4.0
+    specifier: ^4.4.4
+    version: 4.4.4
 
 packages:
 
@@ -277,15 +277,15 @@ packages:
     resolution: {integrity: sha512-xOPwfYaHRQyuIr7p+x3bgp6v4d48h9vh/255MPOaTGG96UqDD0AEY48E72OpLX5ZOixmSlrny6ru+DKvpmlklg==}
     dev: false
 
-  /@taoro/audio-music-source@1.0.0:
-    resolution: {integrity: sha512-LJ5tx11mKOmkbNzg+Z7HnY62zxKrLqudoJANsbC3lzdS0HsB8wgmYlg2puK/wBuMhU0oZ1GXnV5p02khAdieyQ==}
+  /@taoro/audio-music-source@1.0.1:
+    resolution: {integrity: sha512-OZLbYtNWGQctbBo/E4aVY7vyW20FcqGzu0/I5MCRScAN4jdmRDXoPh+F61YjNBowVZrs0W09sjoUWemEXdXHFw==}
     dev: false
 
   /@taoro/audio-music@1.0.0:
     resolution: {integrity: sha512-B+ob55qPo1FTTuX/+kRj7saVPkbCo1pGfqneQq8TG6qKXBB6cizSBAF7veOliK1dKkt5zGtNEC0/FhjShIf1qg==}
     dependencies:
       '@taoro/audio-channel': 1.0.0
-      '@taoro/audio-music-source': 1.0.0
+      '@taoro/audio-music-source': 1.0.1
     dev: false
 
   /@taoro/audio-sound@1.0.0:
@@ -295,7 +295,7 @@ packages:
     dev: false
 
   /@taoro/audio@1.0.0:
-    resolution: {integrity: sha512-bpn1pNp8cnvV2uVBFXhnD5Be4WP4RdfngRQis8LgnfVUH8TXtg2rbUH/8zLUrvy15ssETqqao/5ZBsJ9JOYJRA==}
+    resolution: {integrity: sha512-RNJR5d533uppx5askrvC5tSW0AMzsXLJMUOJSuWcSLBK7aHpXJ26FxP6b/qq5g2IXmYxr9lEb+34nLwgOH9klA==}
     dependencies:
       '@taoro/audio-channel': 1.0.0
       '@taoro/runnable': 1.0.0
@@ -306,7 +306,7 @@ packages:
     dev: false
 
   /@taoro/collider-nano-2d@1.0.1:
-    resolution: {integrity: sha512-tjVAZqG9Ff/BUdaYADPZTSF1D1rW3mbtmLs+BFUoGvNSdmVilu1aXuUzKhVtBzwr+W436xUniH9FipYvpn2Iag==}
+    resolution: {integrity: sha512-64Px5xaDcuvFGcSzLTf+puQlss6qrL+NE9wO3r6lLTPqtIHXwymV9J2I7+TT51RjU7OTFoWheuqyqGFF+/ld2A==}
     dependencies:
       '@taoro/component': 1.0.0
       '@taoro/component-transform-2d': 1.0.0
@@ -315,7 +315,7 @@ packages:
     dev: false
 
   /@taoro/component-transform-2d@1.0.0:
-    resolution: {integrity: sha512-h9HWwRp1BQcP3mbx2VGqBBvLWXQD65pHOa/zWB+p8jmHV5RBVtvCP7iMc+5I0bR6j1h0u0KrID/C7zz9kuEbhQ==}
+    resolution: {integrity: sha512-y4d/5o1Id15DS/eDDqTJFDlywucvtjcwh7iM7Tb1DVvMUN+vWsJ99SVptRJ0qU6ixBMxT4C5/wwKoe4KQTXGFA==}
     dependencies:
       '@taoro/component': 1.0.0
       '@taoro/math-matrix-2d': 1.0.0
@@ -342,7 +342,7 @@ packages:
     dev: false
 
   /@taoro/game@1.0.0:
-    resolution: {integrity: sha512-7CeXs86iBvpxyT73ZbM1IBhChLtuRsocNsIfVaKkx7003Cg+RJzNPXyovbTEU64yUOWnuvsF3GYEuQZgHuinUw==}
+    resolution: {integrity: sha512-rMP4a8uPlCvAz9z4cfa7ubqPoMFb+cjDFxjOZQYe5zwCC9KjGaN8QmdXoWvz/pXWh4/GPye09VASkhJtxhZ23w==}
     dependencies:
       '@taoro/audio': 1.0.0
       '@taoro/audio-music': 1.0.0
@@ -358,7 +358,7 @@ packages:
     dev: false
 
   /@taoro/image-sheet@1.0.2:
-    resolution: {integrity: sha512-PzxA9yJY83DxQEZPvaCv9W0lb3pFOm4ho+DYVHDRRQs2baf4avO2Nc/LIWf/PAehYny6fKRIClafcpSW2PT8Qw==}
+    resolution: {integrity: sha512-G2fkigzUfcUcsqUZ1xHCRaQqylLjZS+uSxBAElWS1VyfQge41MXOyeapukGCfa6JfJrzWYiJ3Je25aIaKlXjFw==}
     dependencies:
       '@taoro/canvas': 1.0.0
       '@taoro/math-point': 1.0.0
@@ -372,42 +372,42 @@ packages:
       '@taoro/runnable': 1.0.0
     dev: false
 
-  /@taoro/input-keyboard@1.0.0:
-    resolution: {integrity: sha512-rirdmNC5aMPb8yWzpjCAD0XztVKvequIrQd5nYlbncHFOiVrjHQ6JWYX/0jMi3OUxlYlRA7sf1aiHTg4qMNs7A==}
+  /@taoro/input-keyboard@1.0.1:
+    resolution: {integrity: sha512-k3IenPy2uO6699QUqRZrQsSb6h7hcEEgb+tFHDVS/LdqHKQYp5Crtz2nelWnMpCXJvcW62/VVYAl5NwRFiYl9w==}
     dependencies:
       '@taoro/events': 1.0.0
       '@taoro/runnable': 1.0.0
     dev: false
 
-  /@taoro/input-mouse@1.0.0:
-    resolution: {integrity: sha512-ABnAFgiz0KinK2KOnpn6kol8h0+hd7tm7EM7xXyrA5gcJEWvN2XSd8BmOPtu78Ne8nb4azgtLneLVBiXZLwWkA==}
+  /@taoro/input-mouse@1.0.4:
+    resolution: {integrity: sha512-3MwMxQREeSrdb4zwqlXU4JqDK81hWINc7UovZzheKDNiv0bU9+dXaKGHCFGUU/pTYSFfr9yX1M2tyLMZU6zn6A==}
     dependencies:
       '@taoro/events': 1.0.0
       '@taoro/runnable': 1.0.0
     dev: false
 
-  /@taoro/input-pointer@1.0.0:
-    resolution: {integrity: sha512-Rz7trg1yMU1NRapqSyUhIYZRz7buL+mRSKsKgtsD++DUE8lrQ18iG8lIf/rkyxmixRJsHE/M7XxcUPHxlEiaXA==}
+  /@taoro/input-pointer@1.0.4:
+    resolution: {integrity: sha512-G2Y+CTfbb0LxN1YhB8jyhs34dW2nVCoohO9kibxzI5akZHRjRwC4YvHnW6Q+KrsrWcwRar3XEZ3C3EmK6tKj1A==}
     dependencies:
       '@taoro/events': 1.0.0
       '@taoro/runnable': 1.0.0
     dev: false
 
-  /@taoro/input-touch@1.0.0:
-    resolution: {integrity: sha512-t7s8CbLAiqXzsJpB/HWX+jigzTVQBqnys32NzJN0yMXMbtw9Vx+jnylGlLA/23YO8c16Io54u953EXkSNgRW9Q==}
+  /@taoro/input-touch@1.0.4:
+    resolution: {integrity: sha512-B7U6m0BnSzVLBCxLMMfqEY0vsl4mTefAbF/pNg8QvRwv/smlBk8r+QSYm2MZhZGV5XhkS0Mchw0+0KypYY4xqw==}
     dependencies:
       '@taoro/events': 1.0.0
       '@taoro/runnable': 1.0.0
     dev: false
 
   /@taoro/input@1.0.0:
-    resolution: {integrity: sha512-lQQniuvkQnUGH0KiaV38gDJRvmnsZd34vdItc6VAgNtvTl/shF5hCyZ9yp8b3QogzXA/++Ecy2qrjXNR8m8Ihg==}
+    resolution: {integrity: sha512-FvLHrPF9JlTkkhmzqGiPg9Cn3nXwnU45vA6TMHXcrUHvBRrxLjuzhR+TxGBK/BmvnkzQTQGKhfBhi1zAWYmLdQ==}
     dependencies:
       '@taoro/input-gamepads': 1.0.0
-      '@taoro/input-keyboard': 1.0.0
-      '@taoro/input-mouse': 1.0.0
-      '@taoro/input-pointer': 1.0.0
-      '@taoro/input-touch': 1.0.0
+      '@taoro/input-keyboard': 1.0.1
+      '@taoro/input-mouse': 1.0.4
+      '@taoro/input-pointer': 1.0.4
+      '@taoro/input-touch': 1.0.4
       '@taoro/runnable': 1.0.0
     dev: false
 
@@ -436,7 +436,7 @@ packages:
     dev: false
 
   /@taoro/renderer-2d@1.0.1:
-    resolution: {integrity: sha512-VTu3mKc7jFda+tOmlIlOTYJlOYo3bhCW70D7CDJnDN4uWemBg98iFRZiT0VcLaq5AXxg+z5+Y0G74f+sxqupJg==}
+    resolution: {integrity: sha512-ffi5qyfwA07sGFqgXTix2PXhozHm4bKjQVg0+ActrGQZWiXkYOmHu1+QOltAnwAJ2KA/DQAepquNi3kkq2cOlw==}
     dependencies:
       '@taoro/component': 1.0.0
       '@taoro/component-transform-2d': 1.0.0
@@ -473,14 +473,14 @@ packages:
       '@taoro/runnable': 1.0.0
     dev: false
 
-  /@vitejs/plugin-vue@4.2.3(vite@4.4.0)(vue@3.3.4):
+  /@vitejs/plugin-vue@4.2.3(vite@4.4.4)(vue@3.3.4):
     resolution: {integrity: sha512-R6JDUfiZbJA9cMiguQ7jxALsgiprjBeHL5ikpXfJCH62pPHtI+JdJ5xWj6Ev73yXSlYl86+blXn1kZHQ7uElxw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.4.0
+      vite: 4.4.4
       vue: 3.3.4
     dev: true
 
@@ -623,8 +623,8 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
 
-  /rollup@3.26.2:
-    resolution: {integrity: sha512-6umBIGVz93er97pMgQO08LuH3m6PUb3jlDUUGFsNJB6VgTCUaDFpupf5JfU30529m/UKOgmiX+uY6Sx8cOYpLA==}
+  /rollup@3.26.3:
+    resolution: {integrity: sha512-7Tin0C8l86TkpcMtXvQu6saWH93nhG3dGQ1/+l5V2TDMceTxO7kDiK6GzbfLWNNxqJXm591PcEZUozZm51ogwQ==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
@@ -639,8 +639,8 @@ packages:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
     engines: {node: '>=4'}
 
-  /vite@4.4.0:
-    resolution: {integrity: sha512-Wf+DCEjuM8aGavEYiF77hnbxEZ+0+/jC9nABR46sh5Xi+GYeSvkeEFRiVuI3x+tPjxgZeS91h1jTAQTPFgePpA==}
+  /vite@4.4.4:
+    resolution: {integrity: sha512-4mvsTxjkveWrKDJI70QmelfVqTm+ihFAb6+xf4sjEU2TmUCTlVX87tmg/QooPEMQb/lM9qGHT99ebqPziEd3wg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -669,7 +669,7 @@ packages:
     dependencies:
       esbuild: 0.18.13
       postcss: 8.4.26
-      rollup: 3.26.2
+      rollup: 3.26.3
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
