@@ -5,6 +5,18 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@taoro/component':
+    specifier: ^1.0.0
+    version: 1.0.0
+  '@taoro/game':
+    specifier: ^1.0.0
+    version: 1.0.0
+  '@taoro/input':
+    specifier: ^1.0.0
+    version: 1.0.0
+  '@taoro/renderer-2d':
+    specifier: ^1.0.0
+    version: 1.0.0
   vue:
     specifier: ^3.3.4
     version: 3.3.4
@@ -242,6 +254,189 @@ packages:
 
   /@jridgewell/sourcemap-codec@1.4.15:
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
+
+  /@taoro/audio-channel@1.0.0:
+    resolution: {integrity: sha512-xOPwfYaHRQyuIr7p+x3bgp6v4d48h9vh/255MPOaTGG96UqDD0AEY48E72OpLX5ZOixmSlrny6ru+DKvpmlklg==}
+    dev: false
+
+  /@taoro/audio-music-source@1.0.0:
+    resolution: {integrity: sha512-LJ5tx11mKOmkbNzg+Z7HnY62zxKrLqudoJANsbC3lzdS0HsB8wgmYlg2puK/wBuMhU0oZ1GXnV5p02khAdieyQ==}
+    dev: false
+
+  /@taoro/audio-music@1.0.0:
+    resolution: {integrity: sha512-B+ob55qPo1FTTuX/+kRj7saVPkbCo1pGfqneQq8TG6qKXBB6cizSBAF7veOliK1dKkt5zGtNEC0/FhjShIf1qg==}
+    dependencies:
+      '@taoro/audio-channel': 1.0.0
+      '@taoro/audio-music-source': 1.0.0
+    dev: false
+
+  /@taoro/audio-sound@1.0.0:
+    resolution: {integrity: sha512-tE4t0vWwV6RFfvMC5pcG3sB8oiMpYP8SgDcf+2TnL1ChyZp9rSF2oKMhrvALR6w9kIe+0tlfI0WBEc0Xip26RQ==}
+    dependencies:
+      '@taoro/audio-channel': 1.0.0
+    dev: false
+
+  /@taoro/audio@1.0.0:
+    resolution: {integrity: sha512-bpn1pNp8cnvV2uVBFXhnD5Be4WP4RdfngRQis8LgnfVUH8TXtg2rbUH/8zLUrvy15ssETqqao/5ZBsJ9JOYJRA==}
+    dependencies:
+      '@taoro/audio-channel': 1.0.0
+      '@taoro/runnable': 1.0.0
+    dev: false
+
+  /@taoro/canvas@1.0.0:
+    resolution: {integrity: sha512-IaWz3BxvHYj5q5nhRlShPCGwNxeVNtBteOPZmcQaOZBAxZ/5rrsRZN8ejfKz4YDDm6ZWnfaBJe5IImXR9bMSxQ==}
+    dev: false
+
+  /@taoro/component-transform-2d@1.0.0:
+    resolution: {integrity: sha512-h9HWwRp1BQcP3mbx2VGqBBvLWXQD65pHOa/zWB+p8jmHV5RBVtvCP7iMc+5I0bR6j1h0u0KrID/C7zz9kuEbhQ==}
+    dependencies:
+      '@taoro/component': 1.0.0
+      '@taoro/math-matrix-2d': 1.0.0
+      '@taoro/math-point': 1.0.0
+    dev: false
+
+  /@taoro/component@1.0.0:
+    resolution: {integrity: sha512-M76HHZWJjvgBQGufrCoJBGMkBJzbnDJgv3i8jhfAmtsfVy6Y9RkAOaFKeup73ddnpu3T6mDJqDNbO+961pg9Tw==}
+    dev: false
+
+  /@taoro/core@1.0.0:
+    resolution: {integrity: sha512-d6Lmldf4XDBAg8TzQzpaVPkAU7AsxDFzNqjRYg7xih4UDVE5jx+9w+L6rg6KOpKvvBPo9toYWBkiDxtxHykU+Q==}
+    dependencies:
+      '@taoro/loop': 1.0.0
+      '@taoro/runnable': 1.0.0
+    dev: false
+
+  /@taoro/events@1.0.0:
+    resolution: {integrity: sha512-v//MZsPOIhfPT577Gf0CsljS+Ky8+Ui7L7hvFxmERkuVcihtJl5bvYnQo0nUs0QrdKPnZkbJoKSrGzHgn4g/JA==}
+    dev: false
+
+  /@taoro/frame-counter@1.0.0:
+    resolution: {integrity: sha512-6jBOGZH5K0rYhFQHlb/se62bay+4ekS5gNn0q3iNJUQIoabuA1ZeUJzAxqKoxHVGxafIzjbJuk5L+08AiHK8Zw==}
+    dev: false
+
+  /@taoro/game@1.0.0:
+    resolution: {integrity: sha512-7CeXs86iBvpxyT73ZbM1IBhChLtuRsocNsIfVaKkx7003Cg+RJzNPXyovbTEU64yUOWnuvsF3GYEuQZgHuinUw==}
+    dependencies:
+      '@taoro/audio': 1.0.0
+      '@taoro/audio-music': 1.0.0
+      '@taoro/audio-sound': 1.0.0
+      '@taoro/core': 1.0.0
+      '@taoro/frame-counter': 1.0.0
+      '@taoro/input': 1.0.0
+      '@taoro/loop': 1.0.0
+      '@taoro/resources': 1.0.0
+      '@taoro/runnable': 1.0.0
+      '@taoro/scheduler': 1.0.0
+      '@taoro/viewport': 1.0.0
+    dev: false
+
+  /@taoro/input-gamepads@1.0.0:
+    resolution: {integrity: sha512-/4XnFrgk8ciLwEJqIii5Z3YbnVcgP24RNqp5Uz5ymqaNFCzWlN/EVxU9CnmxjZSTouOPYkUrdFRuTcN8svv4SQ==}
+    dependencies:
+      '@taoro/events': 1.0.0
+      '@taoro/runnable': 1.0.0
+    dev: false
+
+  /@taoro/input-keyboard@1.0.0:
+    resolution: {integrity: sha512-rirdmNC5aMPb8yWzpjCAD0XztVKvequIrQd5nYlbncHFOiVrjHQ6JWYX/0jMi3OUxlYlRA7sf1aiHTg4qMNs7A==}
+    dependencies:
+      '@taoro/events': 1.0.0
+      '@taoro/runnable': 1.0.0
+    dev: false
+
+  /@taoro/input-mouse@1.0.0:
+    resolution: {integrity: sha512-ABnAFgiz0KinK2KOnpn6kol8h0+hd7tm7EM7xXyrA5gcJEWvN2XSd8BmOPtu78Ne8nb4azgtLneLVBiXZLwWkA==}
+    dependencies:
+      '@taoro/events': 1.0.0
+      '@taoro/runnable': 1.0.0
+    dev: false
+
+  /@taoro/input-pointer@1.0.0:
+    resolution: {integrity: sha512-Rz7trg1yMU1NRapqSyUhIYZRz7buL+mRSKsKgtsD++DUE8lrQ18iG8lIf/rkyxmixRJsHE/M7XxcUPHxlEiaXA==}
+    dependencies:
+      '@taoro/events': 1.0.0
+      '@taoro/runnable': 1.0.0
+    dev: false
+
+  /@taoro/input-touch@1.0.0:
+    resolution: {integrity: sha512-t7s8CbLAiqXzsJpB/HWX+jigzTVQBqnys32NzJN0yMXMbtw9Vx+jnylGlLA/23YO8c16Io54u953EXkSNgRW9Q==}
+    dependencies:
+      '@taoro/events': 1.0.0
+      '@taoro/runnable': 1.0.0
+    dev: false
+
+  /@taoro/input@1.0.0:
+    resolution: {integrity: sha512-lQQniuvkQnUGH0KiaV38gDJRvmnsZd34vdItc6VAgNtvTl/shF5hCyZ9yp8b3QogzXA/++Ecy2qrjXNR8m8Ihg==}
+    dependencies:
+      '@taoro/input-gamepads': 1.0.0
+      '@taoro/input-keyboard': 1.0.0
+      '@taoro/input-mouse': 1.0.0
+      '@taoro/input-pointer': 1.0.0
+      '@taoro/input-touch': 1.0.0
+      '@taoro/runnable': 1.0.0
+    dev: false
+
+  /@taoro/loop@1.0.0:
+    resolution: {integrity: sha512-ql99zV56QFVx17Nq0r6AKcGXdhpb1hUuB5liITqrCSS5lZ0qhHabsvajvSu8WJxGyq1hy8TrwNhRUCdlyOQsow==}
+    dependencies:
+      '@taoro/runnable': 1.0.0
+    dev: false
+
+  /@taoro/math-matrix-2d@1.0.0:
+    resolution: {integrity: sha512-8KTEdlhac/W0ENrlEZEvdDgon/Kr97AFFYfRzpRK3G5jM4g2IyJB7JCcrXIyJuE4D8lJmpm/pWGtNqC3bESRNQ==}
+    dev: false
+
+  /@taoro/math-point@1.0.0:
+    resolution: {integrity: sha512-nsUmatnAOm5St/lhEY+defF0oc0ywXhRUjtoisAOBekBQq6kahHMV3GoOmaemHYOYe+0IgNqrA80hRNT49d7Ig==}
+    dev: false
+
+  /@taoro/math-rect@1.0.0:
+    resolution: {integrity: sha512-FFYwIKgajGycBeTE3sbzP3Kfu+fY9nl1GjadcKAdxhBcy8lJIxPfF5dvvRHr421c8XwRHWl01RqoJN6HCAPjcw==}
+    dependencies:
+      '@taoro/math-point': 1.0.0
+    dev: false
+
+  /@taoro/media@1.0.0:
+    resolution: {integrity: sha512-IfyjtxvrPQCa7/zULXFNjRYOtEUz9P4Mat+lKTvnirfQxSnr3/aviu5O45QZBkKS8bUvbrzzoLsSE7YvWMjuGQ==}
+    dev: false
+
+  /@taoro/renderer-2d@1.0.0:
+    resolution: {integrity: sha512-IhD4+WAP9cuoaZE4DTBMN98gEY0AfJiha3i5RDbMu2R3Vm5pdIObiw13UQUV1UqPXGkQb9/B8Lnp8lWt400Tog==}
+    dependencies:
+      '@taoro/component': 1.0.0
+      '@taoro/component-transform-2d': 1.0.0
+      '@taoro/math-point': 1.0.0
+      '@taoro/math-rect': 1.0.0
+    dev: false
+
+  /@taoro/resource-loader@1.0.0:
+    resolution: {integrity: sha512-m1coZIs1NYb+tJmhMAiEtBTtBgd6U2jbGgXST2WOuCLFUsaDC3NsFFM1ticabLpcfcIn/1syP8q9W4O+RmPmzw==}
+    dependencies:
+      '@taoro/media': 1.0.0
+    dev: false
+
+  /@taoro/resources@1.0.0:
+    resolution: {integrity: sha512-WOiDUmQM6PvRFuqkQFyHCYJnKj+YxUp7n/PmAzyVUcHslv6xahKDtFix0XU2RZK9ah9kolQ6neGkktPI1aCWug==}
+    dependencies:
+      '@taoro/resource-loader': 1.0.0
+    dev: false
+
+  /@taoro/runnable@1.0.0:
+    resolution: {integrity: sha512-D+Sx/kNyUo0GbVr9D7hX6CAV8+80OC7cSllpua7L4hg5ZFKMxXbCjjQnXWH72kacHo/+xZrFygQLpjrqvb+N4w==}
+    dev: false
+
+  /@taoro/scheduler@1.0.0:
+    resolution: {integrity: sha512-9B7v0pS449P9rB0anBuqWfYJtJ2sAFyh65InI8YksJILNVWntG8MCE5JMEnyWY0jBH9F6qhq5AzRIh97UnzRfA==}
+    dev: false
+
+  /@taoro/viewport@1.0.0:
+    resolution: {integrity: sha512-sHgFoF+TJoZQ3tRZA2dlB9bMfsB4BUsMsw4JTttOeJiyOZJQzjEndK9IIYBCgTk85V2uMmmq3ihfslLtt/H2Lg==}
+    dependencies:
+      '@taoro/canvas': 1.0.0
+      '@taoro/events': 1.0.0
+      '@taoro/math-rect': 1.0.0
+      '@taoro/runnable': 1.0.0
+    dev: false
 
   /@vitejs/plugin-vue@4.2.3(vite@4.4.0)(vue@3.3.4):
     resolution: {integrity: sha512-R6JDUfiZbJA9cMiguQ7jxALsgiprjBeHL5ikpXfJCH62pPHtI+JdJ5xWj6Ev73yXSlYl86+blXn1kZHQ7uElxw==}

@@ -9,6 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@taoro/component": "^1.0.0",
+    "@taoro/game": "^1.0.0",
+    "@taoro/input": "^1.0.0",
+    "@taoro/renderer-2d": "^1.0.0",
     "vue": "^3.3.4"
   },
   "devDependencies": {
