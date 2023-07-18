@@ -2,11 +2,7 @@ import { Rect } from '@taoro/math-rect'
 import { TransformComponent } from '@taoro/component-transform-2d'
 import { ColliderComponent } from '@taoro/collider-nano-2d'
 import { TextComponent, RectComponent } from '@taoro/renderer-2d'
-
-function getRandomId(prefix) {
-  const id = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString(36).padStart(8, 0)
-  return `${prefix}-${id}`
-}
+import { getRandomId } from '~/game/utils/id'
 
 export function * LevelBox(game, levelRect, parentTransform) {
   const id = getRandomId('level-box')

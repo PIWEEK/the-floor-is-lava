@@ -5,7 +5,6 @@ import { InputDevice } from '@taoro/input'
 import { Renderer } from '@taoro/renderer-2d'
 import { Collider } from '@taoro/collider-nano-2d'
 import { ViewportResizeMode } from '@taoro/viewport'
-import { Cat } from './entities/Cat.js'
 import { Level } from './entities/Level.js'
 
 let game = null
@@ -19,6 +18,7 @@ export async function start(canvas) {
   game.viewport.width = 1920
   game.viewport.height = 1080
 
+  // TODO: Hacer un cargador.
   game.resources.load('musics/ES_Cool Cat Alley - Alvaro Antin.mp3?taoro:as=audiobuffer')
   game.resources.load('sounds/meowch.wav?taoro:as=audiobuffer')
   game.resources.load('sounds/meow.wav?taoro:as=audiobuffer')
@@ -27,6 +27,11 @@ export async function start(canvas) {
   game.resources.load('images/gato.json')
   game.resources.load('images/gato.png')
   game.resources.load('images/intro.png')
+  game.resources.load('images/01/background.png')
+  for (let i = 0; i < 8; i++) {
+    game.resources.load(`images/01/foreground/${i + 1}.png`)
+
+  }
   game.resources.load('levels/level01.json')
   await game.resources.all()
 
@@ -69,7 +74,6 @@ export async function start(canvas) {
   game.music.a.start()
 
   // Añadimos el gato al juego.
-  game.scheduler.add(Cat(game))
   game.scheduler.add(Level(game, 1))
 
   // Arrancamos el juego.
@@ -77,7 +81,8 @@ export async function start(canvas) {
 }
 
 export function stop() {
-  Component.unregisterAll()
+  game.music.a.stop()
   game.scheduler.clear()
+  Component.unregisterAll()
   game.stop()
 }

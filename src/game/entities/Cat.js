@@ -69,6 +69,9 @@ export function* Cat(game) {
     [CatAnimation.JUMP, [2, 8]],
     [CatAnimation.WALK, [8, 16]]
   ])
+
+  const lavaHeight = 840
+
   let frameAnimation = CatAnimation.JUMP
   let frameIndex = 4
   let currentRectIndex = 0
@@ -140,7 +143,7 @@ export function* Cat(game) {
       }
     }
 
-    if (!collider.hasCollided && transform.position.y < game.viewport.currentHalfHeight) {
+    if (!collider.hasCollided && transform.position.y < lavaHeight) {
       if (!isJumping) {
         velocity.y = 0.001
         isJumping = true
@@ -149,14 +152,14 @@ export function* Cat(game) {
       }
       // Aplicamos la gravedad del juego.
       velocity.y += 0.8
-      if (isJumping && frameIndex >= 3 && transform.position.y > game.viewport.currentHalfHeight - 50) {
+      if (isJumping && frameIndex >= 3 && transform.position.y > lavaHeight - 50) {
         frameIndex = 5
       }
-    } else if (transform.position.y >= game.viewport.currentHalfHeight) {
+    } else if (transform.position.y >= lavaHeight) {
       // El gato está en el suelo (su velocidad vertical es 0
       // y su posición vertical es igual a la mitad de la altura de la pantalla).
       velocity.y = 0
-      transform.position.y = game.viewport.currentHalfHeight
+      transform.position.y = lavaHeight
       if (isJumping && frameIndex >= 2) {
         isJumping = false
         frameAnimation = CatAnimation.DAMAGE
