@@ -5,9 +5,10 @@
 <style scoped>
 canvas {
   aspect-ratio: 16 / 9;
-  width: 100%;
-  height: auto;
-
+  width: 100vw;
+  height: 56.25vw;
+  max-height: 100vh;
+  max-width: 177.78vh;
   box-shadow: 0px 0px 33px 13px rgba(0,0,0,0.75);
 }
 

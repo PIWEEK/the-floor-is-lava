@@ -26,6 +26,7 @@ export async function start(canvas) {
   game.resources.load('fonts/Corben/Corben-Regular.ttf?taoro:family=corben')
   game.resources.load('images/gato.json')
   game.resources.load('images/gato.png')
+  game.resources.load('images/intro.png')
   game.resources.load('levels/level01.json')
   await game.resources.all()
 
