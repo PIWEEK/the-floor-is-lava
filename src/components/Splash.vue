@@ -1,24 +1,13 @@
 <template>
-<div class="hero">
-
-  <button class="start" @click="emit('start')">Start</button>
-  <div class="sound-control">
-    Sound control
-    <div>Music</div>
-    <label for="music-yes">yes</label>
-    <input name="music" id ="music-yes" type="radio">
-    <label for="music-no">no</label>
-    <input name="music" id="music-no" type="radio">
-
-    <div>Sound</div>
-    <label for="sound-yes" >yes</label>
-    <input  id="sound-yes" name="sound" type="radio">
-    <label for="sound-no" >no</label>
-    <input  id="sound-no" name="sound" type="radio">
+  <div class="hero">
+    <button class="start" @click="emit('start')">Start</button>
+    <div class="sound-control">
+      <button @click="music = !music">
+        <p v-if="music">on</p>
+        <p v-else>off</p>
+      </button>
+    </div>
   </div>
-
-
-</div>
 </template>
 
 <style scoped>
@@ -44,6 +33,12 @@
 </style>
 
 <script setup>
+import { ref, watch } from 'vue'
+
 const emit = defineEmits(["start"])
-const mi_variable = 0
+const music = ref(localStorage.getItem("music") === "true" ?? true)
+
+watch(music, (newValue, oldValue) => {
+  localStorage.setItem("music", newValue)
+})
 </script>

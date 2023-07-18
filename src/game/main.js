@@ -11,7 +11,7 @@ let game = null
 
 export async function start(canvas) {
   game = new Game(canvas, {
-    globalThis: true
+    globalThis: true,
   })
 
   game.viewport.mode = ViewportResizeMode.NONE
@@ -19,10 +19,15 @@ export async function start(canvas) {
   game.viewport.height = 1080
 
   // TODO: Hacer un cargador.
-  game.resources.load('musics/ES_Cool Cat Alley - Alvaro Antin.mp3?taoro:as=audiobuffer')
+  game.resources.load(
+    'musics/ES_Cool Cat Alley - Alvaro Antin.mp3?taoro:as=audiobuffer'
+  )
   game.resources.load('sounds/meowch.wav?taoro:as=audiobuffer')
   game.resources.load('sounds/meow.wav?taoro:as=audiobuffer')
   game.resources.load('sounds/meowbrrr.wav?taoro:as=audiobuffer')
+  game.resources.load(
+    'sounds/ES_Cat Hiss Angry Short - SFX Producer.mp3?taoro:as=audiobuffer'
+  )
   game.resources.load('fonts/Corben/Corben-Regular.ttf?taoro:family=corben')
   game.resources.load('images/gato.json')
   game.resources.load('images/gato.png')
@@ -30,7 +35,6 @@ export async function start(canvas) {
   game.resources.load('images/01/background.png')
   for (let i = 0; i < 8; i++) {
     game.resources.load(`images/01/foreground/${i + 1}.png`)
-
   }
   game.resources.load('levels/level01.json')
   await game.resources.all()
@@ -48,17 +52,19 @@ export async function start(canvas) {
         'jump',
         [
           [InputDevice.KEYBOARD, ['KeyW']],
+          [InputDevice.KEYBOARD, ['Space']],
           [InputDevice.KEYBOARD, ['ArrowUp']],
-          [InputDevice.MOUSE, ['LeftButton']],
-          [InputDevice.GAMEPAD, [0, 1, 1, -1]],
+          // [InputDevice.MOUSE, [0, 'LeftButton']],
+          [InputDevice.POINTER, [0, 'LeftButton']],
+          [InputDevice.GAMEPAD, [0, 1, 1, -1]], // 0 -> gamepad 0
         ],
       ],
       [
         'meow',
         [
           [InputDevice.KEYBOARD, ['KeyZ']],
-          [InputDevice.KEYBOARD, ['Space']],
-          [InputDevice.MOUSE, ['RightButton']],
+          // [InputDevice.MOUSE, [0, 'RightButton']],
+          [InputDevice.POINTER, [0, 'RightButton']],
           [InputDevice.GAMEPAD, [0, 0, 0, 1]],
           [InputDevice.GAMEPAD, [0, 0, 1, 1]],
           [InputDevice.GAMEPAD, [0, 0, 2, 1]],
@@ -68,10 +74,8 @@ export async function start(canvas) {
     ]
   })
 
+  game.audio.get(AudioChannelName.MASTER).gain = localStorage.getItem("music") === "true" ? 1 : 0
   game.audio.get(AudioChannelName.MUSIC).gain = 0.125
-
-  game.music.a.buffer = game.resources.get('musics/ES_Cool Cat Alley - Alvaro Antin.mp3?taoro:as=audiobuffer')
-  game.music.a.start()
 
   // Añadimos el gato al juego.
   game.scheduler.add(Level(game, 1))
