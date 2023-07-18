@@ -18,7 +18,7 @@ export function * ForegroundLevel(game, position, parentTransform, level, index)
   })
 
   while (true) {
-    transform.position.x = parentTransform.position.x * 1.2 + position.x
+    transform.position.x = parentTransform.position.x * 1.5 + position.x
     yield // detente aquí hasta la siguiente actualización
   }
 
