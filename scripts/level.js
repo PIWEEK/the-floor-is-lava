@@ -12,3 +12,30 @@ const collisionRects = rects.map((rect) => ({
   width: parseInt((rect.width.baseVal.value / refX * targetX).toFixed()),
   height: parseInt((rect.height.baseVal.value / refY * targetY).toFixed()),
 }))
+
+async function loadLevel(options) {
+  return new Promise((resolve) => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = options?.accept ?? '.json'
+    input.multiple = options?.multiple ?? false
+    input.onchange = (event) => {
+      if (options?.multiple) {
+        resolve(event.files)
+      } else {
+        const [file] = event.files
+        resolve(file)
+      }
+    }
+    input.click()
+  })
+}
+
+const button = document.getElementById('load-level')
+button.onclick = async () => {
+  const file = await loadLevel({
+    accept: '.json',
+    multiple: false
+  })
+  console.log(file)
+}

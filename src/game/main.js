@@ -1,4 +1,6 @@
 import { Game } from '@taoro/game'
+import { Component } from '@taoro/component'
+import { AudioChannelName } from '@taoro/audio-channel'
 import { InputDevice } from '@taoro/input'
 import { Renderer } from '@taoro/renderer-2d'
 import { Collider } from '@taoro/collider-nano-2d'
@@ -6,9 +8,10 @@ import { ViewportResizeMode } from '@taoro/viewport'
 import { Cat } from './entities/Cat.js'
 import { Level } from './entities/Level.js'
 
-export default async function main(canvas) {
+let game = null
 
-  const game = new Game(canvas, {
+export async function start(canvas) {
+  game = new Game(canvas, {
     globalThis: true
   })
 
@@ -59,6 +62,8 @@ export default async function main(canvas) {
     ]
   })
 
+  game.audio.get(AudioChannelName.MUSIC).gain = 0.125
+
   game.music.a.buffer = game.resources.get('musics/ES_Cool Cat Alley - Alvaro Antin.mp3?taoro:as=audiobuffer')
   game.music.a.start()
 
@@ -68,4 +73,10 @@ export default async function main(canvas) {
 
   // Arrancamos el juego.
   game.start()
+}
+
+export function stop() {
+  Component.unregisterAll()
+  game.scheduler.clear()
+  game.stop()
 }

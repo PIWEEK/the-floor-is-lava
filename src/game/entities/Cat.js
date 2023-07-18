@@ -22,7 +22,7 @@ export function* Cat(game) {
   })
 
   const collider = new ColliderComponent('cat', {
-    rect: new Rect(0, 0, 100, 100),
+    rect: new Rect(0, 80, 100, 20),
     tag: 0,
     collidesWithTag: 1,
   })
@@ -128,18 +128,25 @@ export function* Cat(game) {
     velocity.x *= 0.8
 
     if (collider.hasCollided && velocity.y > 0) {
-      velocity.y = 0
-      const [id] = collider.collisions
-      const collisionTransform = Component.findByIdAndConstructor(id, TransformComponent)
-      transform.position.y = collisionTransform.position.y - collider.rect.height
-      if (isJumping && frameIndex >= 2) {
-        frameAnimation = CatAnimation.WALK
-        frameIndex = 0
-        isJumping = false
+      for (const id of collider.collisions) {
+        const collisionTransform = Component.findByIdAndConstructor(id, TransformComponent)
+        velocity.y = 0
+        transform.position.y = collisionTransform.position.y - collider.rect.y - collider.rect.height
+        if (isJumping) {
+          frameAnimation = CatAnimation.WALK
+          frameIndex = 0
+          isJumping = false
+        }
       }
     }
 
     if (!collider.hasCollided && transform.position.y < game.viewport.currentHalfHeight) {
+      if (!isJumping) {
+        velocity.y = 0.001
+        isJumping = true
+        frameAnimation = CatAnimation.JUMP
+        frameIndex = 4
+      }
       // Aplicamos la gravedad del juego.
       velocity.y += 0.8
       if (isJumping && frameIndex >= 3 && transform.position.y > game.viewport.currentHalfHeight - 50) {
@@ -151,10 +158,19 @@ export function* Cat(game) {
       velocity.y = 0
       transform.position.y = game.viewport.currentHalfHeight
       if (isJumping && frameIndex >= 2) {
+        isJumping = false
+        frameAnimation = CatAnimation.DAMAGE
+        frameIndex = 0
+      }
+      // TODO: Esto hace que el gato vaya caminando por el suelo
+      //       de lava.
+      /*
+      if (isJumping && frameIndex >= 2) {
         frameAnimation = CatAnimation.WALK
         frameIndex = 0
         isJumping = false
       }
+      */
     }
 
     const [startIndex, endIndex] = frameIndices.get(frameAnimation)

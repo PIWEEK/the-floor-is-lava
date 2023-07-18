@@ -40,4 +40,5 @@ export function * LevelBox(game, levelRect, parentTransform) {
   transform.unregister()
   collider.unregister()
   rect.unregister()
+  text.unregister()
 }

@@ -22,10 +22,11 @@ canvas {
 </style>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import main from '~/game/main.js'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { start, stop } from '~/game/main.js'
 
 const canvas = ref(null)
 
-onMounted(() => main(canvas.value))
+onMounted(() => start(canvas.value))
+onUnmounted(() => stop())
 </script>

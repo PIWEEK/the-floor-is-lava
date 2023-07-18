@@ -5,6 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@taoro/audio':
+    specifier: ^1.0.2
+    version: 1.0.2
+  '@taoro/audio-channel':
+    specifier: ^1.0.2
+    version: 1.0.2
   '@taoro/collider-nano-2d':
     specifier: ^1.0.1
     version: 1.0.1
@@ -273,8 +279,8 @@ packages:
   /@jridgewell/sourcemap-codec@1.4.15:
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
 
-  /@taoro/audio-channel@1.0.0:
-    resolution: {integrity: sha512-xOPwfYaHRQyuIr7p+x3bgp6v4d48h9vh/255MPOaTGG96UqDD0AEY48E72OpLX5ZOixmSlrny6ru+DKvpmlklg==}
+  /@taoro/audio-channel@1.0.2:
+    resolution: {integrity: sha512-Q3ZA3jBYi6bEJIRIjbG8xf/4a/QiS4tCf/DkhaWgdBF2uQpiSSpGPN4g/q27U7cKct5/hszRqLQPErSNy9JYgw==}
     dev: false
 
   /@taoro/audio-music-source@1.0.1:
@@ -284,21 +290,21 @@ packages:
   /@taoro/audio-music@1.0.0:
     resolution: {integrity: sha512-B+ob55qPo1FTTuX/+kRj7saVPkbCo1pGfqneQq8TG6qKXBB6cizSBAF7veOliK1dKkt5zGtNEC0/FhjShIf1qg==}
     dependencies:
-      '@taoro/audio-channel': 1.0.0
+      '@taoro/audio-channel': 1.0.2
       '@taoro/audio-music-source': 1.0.1
     dev: false
 
   /@taoro/audio-sound@1.0.0:
     resolution: {integrity: sha512-tE4t0vWwV6RFfvMC5pcG3sB8oiMpYP8SgDcf+2TnL1ChyZp9rSF2oKMhrvALR6w9kIe+0tlfI0WBEc0Xip26RQ==}
     dependencies:
-      '@taoro/audio-channel': 1.0.0
+      '@taoro/audio-channel': 1.0.2
     dev: false
 
-  /@taoro/audio@1.0.0:
-    resolution: {integrity: sha512-RNJR5d533uppx5askrvC5tSW0AMzsXLJMUOJSuWcSLBK7aHpXJ26FxP6b/qq5g2IXmYxr9lEb+34nLwgOH9klA==}
+  /@taoro/audio@1.0.2:
+    resolution: {integrity: sha512-JzPE3xkwK5b10n79dsJG9HwyES/1xVVBSk5frlNpFl+FvyMM9WN5hZMBCpRR1xpCMOJEkg3qZLG4ZqRr2aqWsw==}
     dependencies:
-      '@taoro/audio-channel': 1.0.0
-      '@taoro/runnable': 1.0.0
+      '@taoro/audio-channel': 1.0.2
+      '@taoro/runnable': 1.0.2
     dev: false
 
   /@taoro/canvas@1.0.0:
@@ -344,7 +350,7 @@ packages:
   /@taoro/game@1.0.0:
     resolution: {integrity: sha512-rMP4a8uPlCvAz9z4cfa7ubqPoMFb+cjDFxjOZQYe5zwCC9KjGaN8QmdXoWvz/pXWh4/GPye09VASkhJtxhZ23w==}
     dependencies:
-      '@taoro/audio': 1.0.0
+      '@taoro/audio': 1.0.2
       '@taoro/audio-music': 1.0.0
       '@taoro/audio-sound': 1.0.0
       '@taoro/core': 1.0.0
@@ -458,6 +464,10 @@ packages:
 
   /@taoro/runnable@1.0.0:
     resolution: {integrity: sha512-D+Sx/kNyUo0GbVr9D7hX6CAV8+80OC7cSllpua7L4hg5ZFKMxXbCjjQnXWH72kacHo/+xZrFygQLpjrqvb+N4w==}
+    dev: false
+
+  /@taoro/runnable@1.0.2:
+    resolution: {integrity: sha512-0M45TZfS3QwQkFn5uGRZXAHWqChG4UT1gO/vs7sR+FSAltbi4xlKMFVDFejAQVzNT/kFcMhyjf5RR3N4VzlH4Q==}
     dev: false
 
   /@taoro/scheduler@1.0.0:

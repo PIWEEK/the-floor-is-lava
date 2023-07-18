@@ -19,4 +19,6 @@ export function * Level(game, levelIndex) {
     transform.position.x -= 4
     yield
   }
+
+  transform.unregister()
 }
