@@ -21,21 +21,25 @@ export function* Cat(game, parentVelocity, parentTransform) {
     y: 100,
   })
 
+  // 240 -> 525
+  // 144 -> 315
   const collider = new ColliderComponent('cat', {
-    rect: new Rect(0, 80, 100, 20),
+    rect: new Rect(0, 80, 160, 20),
     tag: 0,
     collidesWithTag: 1,
   })
 
-  const gatoRects = game.resources.get('images/gato.json')
-    .map((rect) => new Rect(rect.x, rect.y, rect.width, rect.height))
+  const gatoRects = []
+  for (let i = 0; i < 16; i++) {
+    gatoRects.push(new Rect(i * 350, 0, 350, 220))
+  }
   const gato = game.resources.get('images/gato.png')
   const imageSheet = new ImageSheet(gato.width, gato.height, gatoRects)
 
   const image = new ImageComponent('cat', {
     source: game.resources.get('images/gato.png'),
     rect: new Rect(),
-    pivot: new Point(-35, -35),
+    pivot: new Point(-100, -100),
   })
   image.rect.copy(imageSheet.rectOf(0))
 
@@ -69,11 +73,13 @@ export function* Cat(game, parentVelocity, parentTransform) {
     [CatAnimation.WALK, [8, 16]]
   ])
 
-  const lavaHeight = 840
+  const lavaHeight = 900
 
   let frameAnimation = CatAnimation.JUMP
   let frameIndex = 4
   let currentRectIndex = 0
+
+  const collisionRect = new Rect()
 
   while (true) {
     while (!isDamaged) {
@@ -124,21 +130,22 @@ export function* Cat(game, parentVelocity, parentTransform) {
       transform.position.y += velocity.y
 
       if (collider.hasCollided && velocity.y > 0) {
-        for (const id of collider.collisions) {
-          const collisionTransform = Component.findByIdAndConstructor(id, TransformComponent)
-          if (collisionTransform.position.y - collider.rect.y - transform.position.y < 10) {
-            velocity.y = 0
-            transform.position.y = collisionTransform.position.y - collider.rect.y - collider.rect.height
-            if (isJumping) {
-              frameAnimation = CatAnimation.WALK
-              frameIndex = 0
-              isJumping = false
-            }
-          }
-        }
-      }
+        const [id] = collider.collisions
+        const collisionTransform = Component.findByIdAndConstructor(id, TransformComponent)
+        const collisionCollider = Component.findByIdAndConstructor(id, ColliderComponent)
 
-      if (!collider.hasCollided && transform.position.y < lavaHeight) {
+        collisionRect
+          .copy(collisionCollider.rect)
+          .translatePoint(collisionTransform.position)
+
+        velocity.y = 0
+        transform.position.y = collisionRect.y - collisionRect.height - collider.rect.height / 2
+        if (isJumping) {
+          frameAnimation = CatAnimation.WALK
+          frameIndex = 0
+          isJumping = false
+        }
+      } else if (!collider.hasCollided && transform.position.y < lavaHeight) {
         if (!isJumping) {
           velocity.y = 0.001
           isJumping = true
@@ -161,17 +168,8 @@ export function* Cat(game, parentVelocity, parentTransform) {
           frameIndex = 0
 
           parentVelocity.x = 0
-          game.sound.play(game.resources.get('sounds/ES_Cat Hiss Angry Short - SFX Producer.mp3?taoro:as=audiobuffer'))
+          game.sound.play(game.resources.get('sounds/hiss.mp3?taoro:as=audiobuffer'))
         }
-        // TODO: Esto hace que el gato vaya caminando por el suelo
-        //       de lava.
-        /*
-        if (isJumping && frameIndex >= 2) {
-          frameAnimation = CatAnimation.WALK
-          frameIndex = 0
-          isJumping = false
-        }
-        */
       }
 
       const [startIndex, endIndex] = frameIndices.get(frameAnimation)

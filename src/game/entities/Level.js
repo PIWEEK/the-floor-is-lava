@@ -1,11 +1,12 @@
 import { Point } from '@taoro/math-point'
 import { TransformComponent } from '@taoro/component-transform-2d'
 import { ImageComponent } from '@taoro/renderer-2d'
-import { LevelBox } from './LevelBox.js'
-import { ForegroundLevel } from './ForegroundLevel.js'
+import { LevelSymbol } from './LevelSymbol.js'
 import { Cat } from './Cat.js'
 
-export function * Level(game, levelIndex) {
+export async function * Level(game, levelIndex) {
+  const levelId = levelIndex.toString().padStart(2, 0)
+
   const velocity = new Point(-4, 0)
 
   const transform = new TransformComponent('level', {
@@ -13,30 +14,48 @@ export function * Level(game, levelIndex) {
     y: 0,
   })
 
+  // Cargamos el archivo de nivel.
+  await game.resources.load(`levels/${levelId}/level.json`)
+
+  const { layers, music, background } = game.resources.get(`levels/${levelId}/level.json`)
+  game.resources.load(`levels/${levelId}/${music}?taoro:as=audiobuffer`)
+  game.resources.load(`levels/${levelId}/${background}`)
+  for (const layer of layers) {
+    for (const symbol of layer.symbols) {
+      game.resources.load(`levels/${levelId}/symbols/${symbol.name}.png`)
+    }
+  }
+
+  await game.resources.all()
+
   const backgroundTransform = new TransformComponent('background')
 
   const backgroundImage = new ImageComponent('background', {
-    source: game.resources.get('images/01/background.png')
+    source: game.resources.get(`levels/${levelId}/${background}`),
   })
 
   game.music.a.buffer = game.resources.get(
-    'musics/ES_Cool Cat Alley - Alvaro Antin.mp3?taoro:as=audiobuffer'
+    `levels/${levelId}/${music}?taoro:as=audiobuffer`
   )
   game.music.a.start()
 
-  // Generamos el nivel a partir de la lista de rectángulos del archivo.
-  // TODO: Molaría que esto pudiera cargar todos los recursos de forma más o menos
-  // inteligente.
-  const levelData = game.resources.get(`levels/level${levelIndex.toString().padStart(2, 0)}.json`)
-  for (const rect of levelData) {
-    game.scheduler.add(LevelBox(game, rect, transform))
-  }
+  // Recorremos las capas en orden inverso para crear los elementos
+  // desde la capa más lejana a la más cercana.
+  for (let index = 3; index >= 0; index--) {
+    const layer = layers[index]
 
-  game.scheduler.add(Cat(game, velocity, transform))
+    // TODO: Meter aquí toda la info de los símbolos que estamos
+    // cargando en el nivel.
+    for (const instance of layer.instances) {
+      const symbol = layer.symbols.find((symbol) => symbol.guid === instance.symbol)
+      game.scheduler.add(
+        LevelSymbol(game, transform, instance, symbol, levelId)
+      )
+    }
 
-  for (let i = 0; i < 8; i++) {
-    const position = new Point(1000 + i * 2000, 1080)
-    game.scheduler.add(ForegroundLevel(game, position, transform, '01', i + 1))
+    if (index === 1) {
+      game.scheduler.add(Cat(game, velocity, transform))
+    }
   }
 
   while (true) {
@@ -45,4 +64,8 @@ export function * Level(game, levelIndex) {
   }
 
   transform.unregister()
+
+  backgroundTransform.unregister()
+  backgroundImage.unregister()
+
 }

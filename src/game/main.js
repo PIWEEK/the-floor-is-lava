@@ -19,24 +19,13 @@ export async function start(canvas) {
   game.viewport.height = 1080
 
   // TODO: Hacer un cargador.
-  game.resources.load(
-    'musics/ES_Cool Cat Alley - Alvaro Antin.mp3?taoro:as=audiobuffer'
-  )
   game.resources.load('sounds/meowch.wav?taoro:as=audiobuffer')
   game.resources.load('sounds/meow.wav?taoro:as=audiobuffer')
   game.resources.load('sounds/meowbrrr.wav?taoro:as=audiobuffer')
-  game.resources.load(
-    'sounds/ES_Cat Hiss Angry Short - SFX Producer.mp3?taoro:as=audiobuffer'
-  )
+  game.resources.load('sounds/hiss.mp3?taoro:as=audiobuffer')
   game.resources.load('fonts/Corben/Corben-Regular.ttf?taoro:family=corben')
-  game.resources.load('images/gato.json')
   game.resources.load('images/gato.png')
   game.resources.load('images/intro.png')
-  game.resources.load('images/01/background.png')
-  for (let i = 0; i < 8; i++) {
-    game.resources.load(`images/01/foreground/${i + 1}.png`)
-  }
-  game.resources.load('levels/level01.json')
   await game.resources.all()
 
   // Añadimos el renderer al pipeline del juego.
