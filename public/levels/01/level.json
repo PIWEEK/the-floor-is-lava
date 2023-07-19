@@ -394,7 +394,7 @@
               },
               "size": {
                 "width": 1262,
-                "height": 89
+                "height": 83
               }
             }
           ]
@@ -571,6 +571,38 @@
               }
             }
           ]
+        },
+        {
+          "guid": "627_45353",
+          "name": "estantería-c",
+          "colliders": [
+            {
+              "position": {
+                "x": -1,
+                "y": 100
+              },
+              "size": {
+                "width": 276,
+                "height": 105
+              }
+            }
+          ]
+        },
+        {
+          "guid": "484_222176",
+          "name": "silla-b",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 128
+              },
+              "size": {
+                "width": 152,
+                "height": 36
+              }
+            }
+          ]
         }
       ],
       "instances": [
@@ -720,6 +752,20 @@
             "x": 2275,
             "y": 548
           }
+        },
+        {
+          "symbol": "627_45353",
+          "position": {
+            "x": 5834,
+            "y": 559
+          }
+        },
+        {
+          "symbol": "484_222176",
+          "position": {
+            "x": 6454,
+            "y": 470
+          }
         }
       ]
     },
@@ -833,6 +879,22 @@
           "guid": "484_221093",
           "name": "mesa-c",
           "colliders": []
+        },
+        {
+          "guid": "484_221096",
+          "name": "mesa-a",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 142
+              },
+              "size": {
+                "width": 566,
+                "height": 83
+              }
+            }
+          ]
         }
       ],
       "instances": [
@@ -918,6 +980,13 @@
           "position": {
             "x": 5792,
             "y": 810
+          }
+        },
+        {
+          "symbol": "484_221096",
+          "position": {
+            "x": 9022,
+            "y": 451
           }
         }
       ]
