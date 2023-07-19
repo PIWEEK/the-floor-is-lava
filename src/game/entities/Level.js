@@ -10,6 +10,13 @@ const LEVEL_DECELERATION = 0.1
 const LEVEL_MAX_LAYERS = 4
 const LEVEL_CAT_LAYER = 2
 
+/**
+ * La tarea del nivel es la responsable de controlar la velocidad
+ * del nivel.
+ *
+ * @param {Game} game
+ * @param {number} levelIndex
+ */
 export async function * Level(game, levelIndex) {
   const levelId = levelIndex.toString().padStart(2, 0)
 
@@ -27,6 +34,7 @@ export async function * Level(game, levelIndex) {
   // Cargamos el archivo de nivel.
   await game.resources.load(`levels/${levelId}/level.json`)
 
+  // Cargamos las diferentes capas del nivel.
   const { layers, music, background } = game.resources.get(`levels/${levelId}/level.json`)
   game.resources.load(`levels/${levelId}/${music}?taoro:as=audiobuffer`)
   game.resources.load(`levels/${levelId}/${background}`)
@@ -49,6 +57,7 @@ export async function * Level(game, levelIndex) {
   )
   game.music.a.start()
 
+  //
   for (let index = 0; index < LEVEL_MAX_LAYERS; index++) {
     const layer = layers[index]
     for (const instance of layer.instances) {

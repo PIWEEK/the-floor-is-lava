@@ -6,6 +6,7 @@ import { Renderer } from '@taoro/renderer-2d'
 import { Collider } from '@taoro/collider-nano-2d'
 import { ViewportResizeMode } from '@taoro/viewport'
 import { Level } from './entities/Level.js'
+import { Loading } from './entities/Loading.js'
 
 let game = null
 
@@ -25,7 +26,6 @@ export async function start(canvas) {
   game.resources.load('sounds/hiss.mp3?taoro:as=audiobuffer')
   game.resources.load('fonts/Corben/Corben-Regular.ttf?taoro:family=corben')
   game.resources.load('images/gato.png')
-  game.resources.load('images/intro.png')
   await game.resources.all()
 
   // Añadimos el renderer al pipeline del juego.
@@ -43,16 +43,14 @@ export async function start(canvas) {
           [InputDevice.KEYBOARD, ['KeyW']],
           [InputDevice.KEYBOARD, ['Space']],
           [InputDevice.KEYBOARD, ['ArrowUp']],
-          // [InputDevice.MOUSE, [0, 'LeftButton']],
           [InputDevice.POINTER, [0, 'LeftButton']],
-          [InputDevice.GAMEPAD, [0, 1, 1, -1]], // 0 -> gamepad 0
+          [InputDevice.GAMEPAD, [0, 1, 1, -1]],
         ],
       ],
       [
         'meow',
         [
           [InputDevice.KEYBOARD, ['KeyZ']],
-          // [InputDevice.MOUSE, [0, 'RightButton']],
           [InputDevice.POINTER, [0, 'RightButton']],
           [InputDevice.GAMEPAD, [0, 0, 0, 1]],
           [InputDevice.GAMEPAD, [0, 0, 1, 1]],
@@ -73,6 +71,7 @@ export async function start(canvas) {
   game.audio.get(AudioChannelName.MASTER).gain = localStorage.getItem("music") === "true" ? 1 : 0
   game.audio.get(AudioChannelName.MUSIC).gain = 0.125
 
+  game.scheduler.add(Loading(game))
   // Añadimos el gato al juego.
   game.scheduler.add(Level(game, 1))
 

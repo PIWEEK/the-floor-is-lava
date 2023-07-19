@@ -1,13 +1,13 @@
 import { Point } from '@taoro/math-point'
 import { Rect } from '@taoro/math-rect'
 import { Component } from '@taoro/component'
-import { ImageSheet, ImageSheetRect } from '@taoro/image-sheet'
+import { ImageSheet } from '@taoro/image-sheet'
 import { TextComponent, RectComponent, ImageComponent } from '@taoro/renderer-2d'
 import { TransformComponent } from '@taoro/component-transform-2d'
 import { ColliderComponent } from '@taoro/collider-nano-2d'
-import { Animation } from '~/game/utils/Animation'
-import { CatAnimation } from '~/game/constants/CatAnimation'
-import { CollisionTag } from '~/game/constants/CollisionTag'
+import { Animation } from '~/game/utils/Animation.js'
+import { CatAnimation } from '~/game/constants/CatAnimation.js'
+import { CollisionTag } from '~/game/constants/CollisionTag.js'
 
 const GRAVITY = 0.8
 const ANIMATION_SPEED_WALK = 0.2
@@ -51,6 +51,8 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
   })
   text.pivot.set(200, 150)
 
+  // Si estamos en modo desarrollo mostramos las cajas
+  // de colisión.
   if (import.meta.env.MODE === 'development') {
     const rect = new RectComponent('cat', {
       fillStyle: '',
