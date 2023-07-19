@@ -13,6 +13,5 @@ import Splash from './components/Splash.vue'
 import { ref } from 'vue'
 
 const state = ref(false)
-
 </script>
 

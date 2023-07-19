@@ -52,6 +52,10 @@ export async function * Level(game, levelIndex) {
     source: game.resources.get(`levels/${levelId}/${background}`),
   })
 
+  while (game.resources.loaded < game.resources.total) {
+    yield
+  }
+
   game.music.a.buffer = game.resources.get(
     `levels/${levelId}/${music}?taoro:as=audiobuffer`
   )
@@ -61,7 +65,9 @@ export async function * Level(game, levelIndex) {
   for (let index = 0; index < LEVEL_MAX_LAYERS; index++) {
     const layer = layers[index]
     for (const instance of layer.instances) {
-      const symbol = layer.symbols.find((symbol) => symbol.guid === instance.symbol)
+      const symbol = layer.symbols.find(
+        (symbol) => symbol.guid === instance.symbol
+      )
       game.scheduler.add(
         LevelSymbol(game, transform, instance, symbol, levelId, layer.parallax)
       )

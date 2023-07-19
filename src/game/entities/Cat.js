@@ -10,9 +10,30 @@ import { CatAnimation } from '~/game/constants/CatAnimation.js'
 import { CollisionTag } from '~/game/constants/CollisionTag.js'
 
 const GRAVITY = 0.8
+
+const CAT_SPEED_DAMAGED = 10
+const CAT_ANIMATION_FRAMES = 16
+
+const ANIMATION_JUMP__PREPARE = 0
+const ANIMATION_JUMP__JUMPING = 2
+const ANIMATION_JUMP__FLOATING = 3
+const ANIMATION_JUMP__FALLING = 4
+const ANIMATION_JUMP__LANDING = 5
+
 const ANIMATION_SPEED_WALK = 0.2
 const ANIMATION_SPEED_JUMP = 0.2
 const ANIMATION_SPEED_DAMAGE = 0.5
+const ANIMATION_MAX_FRAME_DAMAGE = 10
+
+function createAnimationRects(source, numRects = CAT_ANIMATION_FRAMES) {
+  const rectWidth = source.width / numRects
+  const rectHeight = source.height
+  const rects = []
+  for (let i = 0; i < numRects; i++) {
+    rects.push(new Rect(i * rectWidth, 0, rectWidth, rectHeight))
+  }
+  return rects
+}
 
 /**
  * Cat.
@@ -31,12 +52,13 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
     collidesWithTag: CollisionTag.SOLID
   })
 
-  const gatoRects = []
-  for (let i = 0; i < 16; i++) {
-    gatoRects.push(new Rect(i * 350, 0, 350, 220))
-  }
+
   const gato = game.resources.get('images/gato.png')
-  const imageSheet = new ImageSheet(gato.width, gato.height, gatoRects)
+  const imageSheet = new ImageSheet(
+    gato.width,
+    gato.height,
+    createAnimationRects(gato)
+  )
 
   const image = new ImageComponent('cat', {
     source: game.resources.get('images/gato.png'),
@@ -45,15 +67,15 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
   })
   image.rect.copy(imageSheet.rectOf(0))
 
-  const text = new TextComponent('cat', {
-    text: () => `${collider.collisions.size}`,
-    font: '24px corben',
-  })
-  text.pivot.set(200, 150)
-
   // Si estamos en modo desarrollo mostramos las cajas
-  // de colisión.
+  // de colisión y un texto de debug.
   if (import.meta.env.MODE === 'development') {
+    const text = new TextComponent('cat', {
+      text: () => `${collider.collisions.size}`,
+      font: '24px corben',
+    })
+    text.pivot.set(200, 150)
+
     const rect = new RectComponent('cat', {
       fillStyle: '',
       strokeStyle: '#f0f',
@@ -88,7 +110,13 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
 
   const collisionRect = new Rect()
 
+  /**
+   * Bucle del gato.
+   */
   while (true) {
+    /**
+     * Bucle de gameplay.
+     */
     while (!isDamaged) {
       if (gameState.isPaused) {
         yield
@@ -123,27 +151,24 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
           animation.animate(ANIMATION_SPEED_JUMP)
           // Cuando el fotograma del gato sea el 3 y su velocidad sea mayor
           // o igual a 0, entonces saltamos.
-          if (animation.isFrame(2) && velocity.y >= 0) {
+          if (animation.isFrame(ANIMATION_JUMP__JUMPING) && velocity.y >= 0) {
             velocity.y -= Math.max(10, Math.min(30, jumpingCount * 3))
             parentVelocity.x = -Math.max(5, Math.min(10, jumpingCount))
             jumpingCount = 0
           }
         } else if (velocity.y >= -30 && velocity.y <= -10) {
-          animation.frame = 2
+          animation.frame = ANIMATION_JUMP__JUMPING
         } else if (velocity.y >= -10 && velocity.y < 0) {
-          animation.frame = 3
+          animation.frame = ANIMATION_JUMP__FLOATING
         } else if (velocity.y >= 0) {
-          animation.frame = 4
+          animation.frame = ANIMATION_JUMP__FALLING
         }
       } else if (animation.isAnimation(CatAnimation.DAMAGE)) {
         animation.animate(ANIMATION_SPEED_DAMAGE)
-        if (animation.frame > 10) {
+        if (animation.frame > ANIMATION_MAX_FRAME_DAMAGE) {
           isDamaged = true
         }
       }
-
-      transform.position.x += velocity.x
-      transform.position.y += velocity.y
 
       /*
       if (collider.hasCollided) {
@@ -181,7 +206,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
         if (!isJumping) {
           velocity.y = 0
           isJumping = true
-          animation.set(CatAnimation.JUMP, 4)
+          animation.set(CatAnimation.JUMP, ANIMATION_JUMP__FALLING)
         }
         // Aplicamos la gravedad del juego.
         velocity.y += GRAVITY
@@ -201,12 +226,22 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
         }
       }
       image.rect.copy(imageSheet.rectOf(animation.currentFrame))
+
+      transform.position.x += velocity.x
+      transform.position.y += velocity.y
+
       yield
     }
 
+    /**
+     * Cuando salimos del bucle principal, entramos
+     * en el bucle de animación de daño.
+     */
     animation.set(CatAnimation.WALK)
+    velocity.reset()
     while (transform.position.x < game.viewport.currentWidth) {
-      transform.position.x += 10
+      velocity.x += 1
+      transform.position.x += velocity.x
       animation.animate()
       image.rect.copy(imageSheet.rectOf(animation.currentFrame))
       yield
