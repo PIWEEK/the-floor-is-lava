@@ -193,7 +193,9 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
         if (collider.hasCollided) {
           const [collision] = collider.collisions
 
-          debugCollisionRect.rect.copy(collision.targetRect)
+          if (debugCollisionRect) {
+            debugCollisionRect.rect.copy(collision.targetRect)
+          }
 
           if (velocity.y > 0) {
             velocity.reset()
@@ -220,7 +222,9 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
         }
 
         if (!collider.hasCollided) {
-          debugCollisionRect.rect.reset()
+          if (debugCollisionRect) {
+            debugCollisionRect.rect.reset()
+          }
         }
 
         if (!collider.hasCollided && transform.position.y < LAVA_Y) {

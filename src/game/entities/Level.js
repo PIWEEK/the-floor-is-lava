@@ -31,6 +31,12 @@ export async function * Level(game, levelIndex) {
     y: 0,
   })
 
+  game.resources.load('sounds/meowch.wav?taoro:as=audiobuffer')
+  game.resources.load('sounds/meow.wav?taoro:as=audiobuffer')
+  game.resources.load('sounds/meowbrrr.wav?taoro:as=audiobuffer')
+  game.resources.load('sounds/hiss.mp3?taoro:as=audiobuffer')
+  game.resources.load('images/gato.png')
+
   // Cargamos el archivo de nivel.
   await game.resources.load(`levels/${levelId}/level.json`)
   // Cargamos los datos del nivel, la música de fondo
