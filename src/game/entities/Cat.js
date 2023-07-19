@@ -62,7 +62,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
   })
 
   const collider = new ColliderComponent('cat', {
-    rect: new Rect(0, 80, 160, 20),
+    rect: new Rect(0, 0, 160, 20),
     tag: CollisionTag.CAT,
     collidesWithTag: CollisionTag.SOLID
   })
@@ -79,7 +79,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
   const image = new ImageComponent('cat', {
     source: cat,
     rect: new Rect(),
-    pivot: new Point(-100, -100),
+    pivot: new Point(-100, -175),
   })
   image.rect.copy(imageSheet.rectOf(0))
 
@@ -102,7 +102,6 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
       text: () => `${collider.collisions.size}`,
       font: '24px corben',
     })
-    text.pivot.set(200, 150)
 
     const rect = new RectComponent('cat', {
       fillStyle: '',
@@ -211,7 +210,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
             //
             // transform.position.y = collisionRect.y - collider.rect.height
             //
-            transform.position.y = collisionRect.y - collisionRect.height - collider.rect.height / 2
+            transform.position.y = collisionRect.y - collider.rect.height
             if (isJumping) {
               isJumping = false
               animation.set(CatAnimation.WALK)
