@@ -1,8 +1,9 @@
 <template>
   <div class="hero">
+    <h1>The<br>Floor<br>Is<br>Lava</h1>
     <div class="buttons">
-      <button class="start" @click="emit('start')">Play</button>
-      <!-- <button class="reload" @click="emit('start')">Restart</button> -->
+      <button class="start button" @click="emit('start')">Play</button>
+      <!-- <button class="reload button" @click="emit('start')">Restart</button> -->
       <div class="sound-control">
         <button @click="music = !music">
           <VolumeOn v-if="music" />
@@ -14,6 +15,15 @@
 </template>
 
 <style scoped>
+h1 {
+  position: absolute;
+  font-size: 6rem;
+  top: 10%;
+  left: 10%;
+  line-height: 6rem;
+  color: #FFD2C6;
+}
+
 .hero {
   aspect-ratio: 16 / 9;
   width: 100vw;
@@ -21,10 +31,10 @@
   max-height: 100vh;
   max-width: 177.78vh;
   box-shadow: 0px 0px 33px 13px rgba(0, 0, 0, 0.75);
-  background-image: url('/images/intro.png');
+  background-image: url('/images/background.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   position: relative;
 }
 
@@ -38,6 +48,20 @@
   align-items: flex-start;
   gap: 1.5rem;
 }
+
+.button {
+  font-size: 2.5rem;
+  color: #FFEFDF;
+  font-family: Corben;
+  border: none;
+  background-color: transparent;
+  text-transform: uppercase;
+}
+
+.button:hover {
+  color: #FFF;
+}
+
 .sound-control svg {
   font-size: 4rem;
   stroke: #FFEFDF;
@@ -47,21 +71,15 @@
   width: 2.5rem;
 }
 
+.sound-control svg:hover {
+  stroke: #FFF;
+}
+
 .sound-control button {
   border: none;
   background-color: transparent;
 }
-.start {
-  font-size: 2.5rem;
-  color: #FFEFDF;
-  font-family: sans-serif;
-  border: none;
-  background-color: transparent;
-  text-transform: uppercase;
-}
-/* .reload {
-  bottom: 21%;
-} */
+
 </style>
 
 <script setup>

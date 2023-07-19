@@ -10,6 +10,10 @@ canvas {
   max-height: 100vh;
   max-width: 177.78vh;
   box-shadow: 0px 0px 33px 13px rgba(0,0,0,0.75);
+  background-image: url('/images/background.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 </style>

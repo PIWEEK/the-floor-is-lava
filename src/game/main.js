@@ -26,6 +26,7 @@ export async function start(canvas) {
   game.resources.load('sounds/hiss.mp3?taoro:as=audiobuffer')
   game.resources.load('fonts/Corben/Corben-Regular.ttf?taoro:family=corben')
   game.resources.load('images/gato.png')
+  game.resources.load('images/background.png')
   await game.resources.all()
 
   // Añadimos el renderer al pipeline del juego.
