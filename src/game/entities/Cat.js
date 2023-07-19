@@ -4,10 +4,10 @@ import { Component } from '@taoro/component'
 import { ImageSheet } from '@taoro/image-sheet'
 import { TextComponent, RectComponent, ImageComponent } from '@taoro/renderer-2d'
 import { TransformComponent } from '@taoro/component-transform-2d'
-import { ColliderComponent } from '@taoro/collider-nano-2d'
 import { Animation } from '~/game/utils/Animation.js'
 import { CatAnimation } from '~/game/constants/CatAnimation.js'
 import { CollisionTag } from '~/game/constants/CollisionTag.js'
+import { ColliderComponent } from '~/game/systems/Collider.js'
 
 const GRAVITY = 0.8
 
@@ -62,7 +62,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
   })
 
   const collider = new ColliderComponent('cat', {
-    rect: new Rect(0, 0, 160, 20),
+    rects: [new Rect(0, 0, 160, 20)],
     tag: CollisionTag.CAT,
     collidesWithTag: CollisionTag.SOLID
   })
@@ -107,7 +107,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
       fillStyle: '',
       strokeStyle: '#f0f',
     })
-    rect.rect.copy(collider.rect)
+    rect.rect.copy(collider.rects[0])
 
     debugTransform = new TransformComponent('debug-collision-rect', {})
     debugCollisionRect = new RectComponent('debug-collision-rect', {
@@ -191,15 +191,9 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
         */
 
         if (collider.hasCollided) {
-          const [id] = collider.collisions
-          const collisionTransform = Component.findByIdAndConstructor(id, TransformComponent)
-          const collisionCollider = Component.findByIdAndConstructor(id, ColliderComponent)
+          const [collision] = collider.collisions
 
-          collisionRect
-            .copy(collisionCollider.rect)
-            .translatePoint(collisionTransform.position)
-
-          debugCollisionRect.rect.copy(collisionRect)
+          debugCollisionRect.rect.copy(collision.targetRect)
 
           if (velocity.y > 0) {
             velocity.reset()
@@ -210,7 +204,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
             //
             // transform.position.y = collisionRect.y - collider.rect.height
             //
-            transform.position.y = collisionRect.y - collider.rect.height
+            transform.position.y = collision.targetRect.y - collider.rects[0].height
             if (isJumping) {
               isJumping = false
               animation.set(CatAnimation.WALK)

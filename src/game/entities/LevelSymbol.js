@@ -1,7 +1,7 @@
 import { Rect } from '@taoro/math-rect'
 import { ImageComponent, RectComponent } from "@taoro/renderer-2d"
 import { TransformComponent } from "@taoro/component-transform-2d"
-import { ColliderComponent } from "@taoro/collider-nano-2d"
+import { ColliderComponent } from '~/game/systems/Collider.js'
 import { getRandomId } from '~/game/utils/id'
 import { CollisionTag } from '~/game/constants/CollisionTag'
 
@@ -29,13 +29,9 @@ export function * LevelSymbol(game, parentTransform, instance, symbol, levelId, 
     source
   })
 
-  const colliders = []
+  const rects = []
   for (const { position, size } of symbol.colliders) {
-    new ColliderComponent(id, {
-      rect: new Rect(position.x, position.y, size.width, size.height),
-      tag: CollisionTag.SOLID,
-      collidesWithTag: CollisionTag.CAT,
-    })
+    rects.push(new Rect(position.x, position.y, size.width, size.height))
 
     // Si estamos en modo desarrollo mostramos las cajas
     // de colisión.
@@ -47,6 +43,11 @@ export function * LevelSymbol(game, parentTransform, instance, symbol, levelId, 
       })
     }
   }
+  const collider = new ColliderComponent(id, {
+    rects: rects,
+    tag: CollisionTag.SOLID,
+    collidesWithTag: CollisionTag.CAT,
+  })
 
   while (true) {
     transform.position.x = parentTransform.position.x * parallax + instance.position.x
@@ -54,7 +55,7 @@ export function * LevelSymbol(game, parentTransform, instance, symbol, levelId, 
   }
 
   image.unregister()
-  colliders.forEach(collider => collider.unregister())
+  collider.unregister()
 }
 
 export default LevelSymbol

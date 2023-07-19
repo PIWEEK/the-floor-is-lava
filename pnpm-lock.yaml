@@ -35,6 +35,9 @@ dependencies:
   '@taoro/math-rect':
     specifier: ^1.0.2
     version: 1.0.2
+  '@taoro/pool':
+    specifier: ^1.0.2
+    version: 1.0.2
   '@taoro/renderer-2d':
     specifier: ^1.0.3
     version: 1.0.3
@@ -442,6 +445,10 @@ packages:
 
   /@taoro/media@1.0.2:
     resolution: {integrity: sha512-UYqRE//V9G3U5ojnY9KvFuMcpfUSZnJP9TYxmkZqjwNUYSsdeg3g71jkXsDBK40PXRfNJRJpiWpi3ItYabwCxQ==}
+    dev: false
+
+  /@taoro/pool@1.0.2:
+    resolution: {integrity: sha512-lX2yVIWuQ7nZ8/cj8U/1jt6lFVa1j8Es3HAWcoO5PjZM6JhzI32ofYiFQyZr8KldaJqVbqtPw1NbhG+mwdk6Dw==}
     dev: false
 
   /@taoro/renderer-2d@1.0.3:
