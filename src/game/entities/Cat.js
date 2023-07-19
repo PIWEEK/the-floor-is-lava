@@ -11,6 +11,8 @@ import { CollisionTag } from '~/game/constants/CollisionTag.js'
 
 const GRAVITY = 0.8
 
+const LAVA_Y = 900
+
 const CAT_MIN_JUMP_SPEED = 10
 const CAT_MAX_JUMP_SPEED = 30
 const CAT_MIN_X_SPEED = 5
@@ -111,10 +113,8 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
       [CatAnimation.WALK, [8, 16]]
     ]),
     CatAnimation.JUMP,
-    4
+    ANIMATION_JUMP__FALLING
   )
-
-  const lavaHeight = 900
 
   let jumpingCount = 0
 
@@ -203,22 +203,22 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
             isJumping = false
             animation.set(CatAnimation.WALK)
           }
-        } else if (!collider.hasCollided && transform.position.y < lavaHeight) {
+        } else if (!collider.hasCollided && transform.position.y < LAVA_Y) {
           if (!isJumping) {
             isJumping = true
             velocity.reset()
             animation.set(CatAnimation.JUMP, ANIMATION_JUMP__FALLING)
           }
           // Aplicamos la gravedad del juego.
-          if (isJumping && animation.frame >= 3 && transform.position.y > lavaHeight - 50) {
-            animation.frame = 5
+          if (isJumping && animation.frame >= ANIMATION_JUMP__FLOATING && transform.position.y > LAVA_Y - 50) {
+            animation.frame = ANIMATION_JUMP__LANDING
           }
           velocity.y += GRAVITY
-        } else if (transform.position.y >= lavaHeight) {
+        } else if (transform.position.y >= LAVA_Y) {
           // El gato está en el suelo (su velocidad vertical es 0
           // y su posición vertical es igual a la mitad de la altura de la pantalla).
           velocity.reset()
-          transform.position.y = lavaHeight
+          transform.position.y = LAVA_Y
           if (isJumping) {
             isJumping = false
             isDamaged = true
