@@ -46,13 +46,6 @@ export async function start(canvas) {
           [InputDevice.KEYBOARD, ['ArrowUp']],
           [InputDevice.POINTER, [0, 'LeftButton']],
           [InputDevice.GAMEPAD, [0, 1, 1, -1]],
-        ],
-      ],
-      [
-        'meow',
-        [
-          [InputDevice.KEYBOARD, ['KeyZ']],
-          [InputDevice.POINTER, [0, 'RightButton']],
           [InputDevice.GAMEPAD, [0, 0, 0, 1]],
           [InputDevice.GAMEPAD, [0, 0, 1, 1]],
           [InputDevice.GAMEPAD, [0, 0, 2, 1]],

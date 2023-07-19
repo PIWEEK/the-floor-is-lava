@@ -148,18 +148,6 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
           jumpingCount++
         }
 
-        if (game.input.stateOf(0, 'meow') && !isMeowing) {
-          game.sound.play(
-            game.resources.get('sounds/meow.wav?taoro:as=audiobuffer'),
-            {
-              playbackRate: 1 + Math.random() * 0.5,
-              onEnded: () => (isMeowing = false),
-            }
-          )
-          animation.set(CatAnimation.DAMAGE)
-          isMeowing = true
-        }
-
         if (animation.isAnimation(CatAnimation.WALK)) {
           animation.animate(ANIMATION_SPEED_WALK)
         } else if (animation.isAnimation(CatAnimation.JUMP) && isJumping) {
