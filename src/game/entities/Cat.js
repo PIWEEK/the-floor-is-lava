@@ -35,6 +35,13 @@ const ANIMATION_SPEED_JUMP = 0.2
 const ANIMATION_SPEED_DAMAGE = 0.5
 const ANIMATION_MAX_FRAME_DAMAGE = 10
 
+/**
+ * Crea un array de rectángulos a partir de una imagen.
+ *
+ * @param {CanvasImageSource} source
+ * @param {number} numRects
+ * @returns {Array<Rect>}
+ */
 function createAnimationRects(source, numRects = CAT_ANIMATION_FRAMES) {
   const rectWidth = source.width / numRects
   const rectHeight = source.height
@@ -54,28 +61,38 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
     y: CAT_INITIAL_Y,
   })
 
-  // 240 -> 525
-  // 144 -> 315
   const collider = new ColliderComponent('cat', {
     rect: new Rect(0, 80, 160, 20),
     tag: CollisionTag.CAT,
     collidesWithTag: CollisionTag.SOLID
   })
 
-
-  const gato = game.resources.get('images/gato.png')
+  const cat = game.resources.get('images/gato.png')
   const imageSheet = new ImageSheet(
-    gato.width,
-    gato.height,
-    createAnimationRects(gato)
+    cat.width,
+    cat.height,
+    createAnimationRects(cat)
   )
 
+  // Creamos un componente imagen que renderizará
+  // el gato en pantalla con el fotograma actual.
   const image = new ImageComponent('cat', {
-    source: game.resources.get('images/gato.png'),
+    source: cat,
     rect: new Rect(),
     pivot: new Point(-100, -100),
   })
   image.rect.copy(imageSheet.rectOf(0))
+
+  // Creamos un controlador para la animación.
+  const animation = new Animation(
+    new Map([
+      [CatAnimation.DAMAGE, [0, 2]],
+      [CatAnimation.JUMP, [2, 8]],
+      [CatAnimation.WALK, [8, 16]],
+    ]),
+    CatAnimation.JUMP,
+    ANIMATION_JUMP__FALLING
+  )
 
   // Si estamos en modo desarrollo mostramos las cajas
   // de colisión y un texto de debug.
@@ -93,32 +110,24 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
     rect.rect.copy(collider.rect)
   }
 
-  game.sound.play(game.resources.get('sounds/meow.wav?taoro:as=audiobuffer'), {
-    playbackRate: 1 + Math.random() * 0.5,
-    onEnded: () => (isMeowing = false),
-  })
-
   const velocity = new Point(0, 0)
 
   // TODO: ¿Esto podría hacerse con una FSM?
   let isRunning = false
   let isDamaged = false
   let isJumping = true
+  let jumpingCount = 0
   let isMeowing = false
 
-  const animation = new Animation(
-    new Map([
-      [CatAnimation.DAMAGE, [0, 2]],
-      [CatAnimation.JUMP, [2, 8]],
-      [CatAnimation.WALK, [8, 16]]
-    ]),
-    CatAnimation.JUMP,
-    ANIMATION_JUMP__FALLING
-  )
-
-  let jumpingCount = 0
-
+  // TODO: Esto lo uso para cosas de debug de las
+  // colisiones porque hay algo muy raro con las
+  // colisiones del gato.
   const collisionRect = new Rect()
+
+  game.sound.play(game.resources.get('sounds/meow.wav?taoro:as=audiobuffer'), {
+    playbackRate: 1 + Math.random() * 0.5,
+    onEnded: () => (isMeowing = false),
+  })
 
   /**
    * Bucle del gato.
@@ -202,6 +211,13 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
           if (isJumping) {
             isJumping = false
             animation.set(CatAnimation.WALK)
+            if (Math.random() > 0.85) {
+              isMeowing = true
+              game.sound.play(game.resources.get('sounds/meow.wav?taoro:as=audiobuffer'), {
+                playbackRate: 1 + Math.random() * 0.5,
+                onEnded: () => (isMeowing = false),
+              })
+            }
           }
         } else if (!collider.hasCollided && transform.position.y < LAVA_Y) {
           if (!isJumping) {
@@ -237,8 +253,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
       }
       image.rect.copy(imageSheet.rectOf(animation.currentFrame))
 
-      transform.position.x += velocity.x
-      transform.position.y += velocity.y
+      transform.position.add(velocity)
       yield
     }
 
@@ -250,7 +265,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
     velocity.reset()
     while (transform.position.x < game.viewport.currentWidth) {
       velocity.x += 1
-      transform.position.x += velocity.x
+      transform.position.add(velocity)
       animation.animate()
       image.rect.copy(imageSheet.rectOf(animation.currentFrame))
       yield
