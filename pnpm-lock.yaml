@@ -38,6 +38,9 @@ dependencies:
   '@taoro/renderer-2d':
     specifier: ^1.0.3
     version: 1.0.3
+  '@taoro/scheduler':
+    specifier: ^1.0.3
+    version: 1.0.3
   '@taoro/viewport':
     specifier: ^1.0.2
     version: 1.0.2

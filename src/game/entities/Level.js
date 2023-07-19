@@ -4,10 +4,20 @@ import { ImageComponent } from '@taoro/renderer-2d'
 import { LevelSymbol } from './LevelSymbol.js'
 import { Cat } from './Cat.js'
 
+const LEVEL_SPEED = -4
+const LEVEL_DECELERATION = 0.1
+
+const LEVEL_MAX_LAYERS = 4
+const LEVEL_CAT_LAYER = 2
+
 export async function * Level(game, levelIndex) {
   const levelId = levelIndex.toString().padStart(2, 0)
 
-  const velocity = new Point(-4, 0)
+  const velocity = new Point(LEVEL_SPEED, 0)
+  const gameState = {
+    pauseStart: 0,
+    isPaused: false
+  }
 
   const transform = new TransformComponent('level', {
     x: 0,
@@ -39,26 +49,28 @@ export async function * Level(game, levelIndex) {
   )
   game.music.a.start()
 
-  // Recorremos las capas en orden inverso para crear los elementos
-  // desde la capa más lejana a la más cercana.
-  for (let index = 3; index >= 0; index--) {
+  for (let index = 0; index < LEVEL_MAX_LAYERS; index++) {
     const layer = layers[index]
-
-    // TODO: Meter aquí toda la info de los símbolos que estamos
-    // cargando en el nivel.
     for (const instance of layer.instances) {
       const symbol = layer.symbols.find((symbol) => symbol.guid === instance.symbol)
       game.scheduler.add(
-        LevelSymbol(game, transform, instance, symbol, levelId)
+        LevelSymbol(game, transform, instance, symbol, levelId, layer.parallax)
       )
     }
 
-    if (index === 1) {
-      game.scheduler.add(Cat(game, velocity, transform))
+    if (index === LEVEL_CAT_LAYER) {
+      game.scheduler.add(Cat(game, velocity, transform, gameState))
     }
   }
 
   while (true) {
+    if(game.input.stateOf(0, 'pause') && performance.now() - gameState.pauseStart >= 500) {
+      gameState.pauseStart = performance.now()
+      gameState.isPaused = !gameState.isPaused
+    }
+    if (velocity.x < LEVEL_SPEED) {
+      velocity.x += LEVEL_DECELERATION
+    }
     transform.position.x += velocity.x
     yield
   }

@@ -2,7 +2,7 @@
   <div class="hero">
     <div class="buttons">
       <button class="start" @click="emit('start')">Play</button>
-      <button class="reload" @click="emit('start')">Restart</button>
+      <!-- <button class="reload" @click="emit('start')">Restart</button> -->
       <div class="sound-control">
         <button @click="music = !music">
           <VolumeOn v-if="music" />
@@ -51,8 +51,7 @@
   border: none;
   background-color: transparent;
 }
-.start,
-.reload {
+.start {
   font-size: 2.5rem;
   color: #FFEFDF;
   font-family: sans-serif;
@@ -60,9 +59,9 @@
   background-color: transparent;
   text-transform: uppercase;
 }
-.reload {
+/* .reload {
   bottom: 21%;
-}
+} */
 </style>
 
 <script setup>

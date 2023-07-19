@@ -5,17 +5,19 @@ import { ImageSheet, ImageSheetRect } from '@taoro/image-sheet'
 import { TextComponent, RectComponent, ImageComponent } from '@taoro/renderer-2d'
 import { TransformComponent } from '@taoro/component-transform-2d'
 import { ColliderComponent } from '@taoro/collider-nano-2d'
+import { Animation } from '~/game/utils/Animation'
+import { CatAnimation } from '~/game/constants/CatAnimation'
+import { CollisionTag } from '~/game/constants/CollisionTag'
 
-export const CatAnimation = {
-  DAMAGE: 'damage',
-  JUMP: 'jump',
-  WALK: 'walk',
-}
+const GRAVITY = 0.8
+const ANIMATION_SPEED_WALK = 0.2
+const ANIMATION_SPEED_JUMP = 0.2
+const ANIMATION_SPEED_DAMAGE = 0.5
 
 /**
  * Cat.
  */
-export function* Cat(game, parentVelocity, parentTransform) {
+export function* Cat(game, parentVelocity, parentTransform, gameState) {
   const transform = new TransformComponent('cat', {
     x: 400,
     y: 100,
@@ -25,8 +27,8 @@ export function* Cat(game, parentVelocity, parentTransform) {
   // 144 -> 315
   const collider = new ColliderComponent('cat', {
     rect: new Rect(0, 80, 160, 20),
-    tag: 0,
-    collidesWithTag: 1,
+    tag: CollisionTag.CAT,
+    collidesWithTag: CollisionTag.SOLID
   })
 
   const gatoRects = []
@@ -49,11 +51,13 @@ export function* Cat(game, parentVelocity, parentTransform) {
   })
   text.pivot.set(200, 150)
 
-  const rect = new RectComponent('cat', {
-    fillStyle: '',
-    strokeStyle: '#f0f',
-  })
-  rect.rect.copy(collider.rect)
+  if (import.meta.env.MODE === 'development') {
+    const rect = new RectComponent('cat', {
+      fillStyle: '',
+      strokeStyle: '#f0f',
+    })
+    rect.rect.copy(collider.rect)
+  }
 
   game.sound.play(game.resources.get('sounds/meow.wav?taoro:as=audiobuffer'), {
     playbackRate: 1 + Math.random() * 0.5,
@@ -66,27 +70,36 @@ export function* Cat(game, parentVelocity, parentTransform) {
   let isJumping = true
   let isMeowing = false
 
-  // CatAnimation.WALK, 'jump' y 'damage'
-  const frameIndices = new Map([
-    [CatAnimation.DAMAGE, [0, 2]],
-    [CatAnimation.JUMP, [2, 8]],
-    [CatAnimation.WALK, [8, 16]]
-  ])
+  const animation = new Animation(
+    new Map([
+      [CatAnimation.DAMAGE, [0, 2]],
+      [CatAnimation.JUMP, [2, 8]],
+      [CatAnimation.WALK, [8, 16]]
+    ]),
+    CatAnimation.JUMP,
+    4
+  )
 
   const lavaHeight = 900
 
-  let frameAnimation = CatAnimation.JUMP
-  let frameIndex = 4
-  let currentRectIndex = 0
+  let jumpingCount = 0
 
   const collisionRect = new Rect()
 
   while (true) {
     while (!isDamaged) {
+      if (gameState.isPaused) {
+        yield
+      }
+
       if (game.input.stateOf(0, 'jump') && !isJumping) {
-        frameAnimation = CatAnimation.JUMP
-        frameIndex = 0
+        jumpingCount = 0
+        animation.set(CatAnimation.JUMP)
         isJumping = true
+      }
+
+      if (game.input.stateOf(0, 'jump') && isJumping) {
+        jumpingCount++
       }
 
       if (game.input.stateOf(0, 'meow') && !isMeowing) {
@@ -97,37 +110,55 @@ export function* Cat(game, parentVelocity, parentTransform) {
             onEnded: () => (isMeowing = false),
           }
         )
-        frameAnimation = CatAnimation.DAMAGE
-        frameIndex = 0
+        animation.set(CatAnimation.DAMAGE)
         isMeowing = true
       }
 
-      if (frameAnimation === CatAnimation.WALK) {
-        frameIndex += 0.2
-      } else if (frameAnimation === CatAnimation.JUMP && isJumping) {
+      if (animation.isAnimation(CatAnimation.WALK)) {
+        animation.animate(ANIMATION_SPEED_WALK)
+      } else if (animation.isAnimation(CatAnimation.JUMP) && isJumping) {
         if (velocity.y === 0) {
-          frameIndex += 0.2
-          if (Math.floor(frameIndex) === 2 && velocity.y >= 0) {
-            velocity.y -= 20
+          animation.animate(ANIMATION_SPEED_JUMP)
+          // Cuando el fotograma del gato sea el 3 y su velocidad sea mayor
+          // o igual a 0, entonces saltamos.
+          if (animation.isFrame(2) && velocity.y >= 0) {
+            velocity.y -= Math.max(10, Math.min(30, jumpingCount * 3))
+            parentVelocity.x = -Math.max(5, Math.min(10, jumpingCount))
+            jumpingCount = 0
           }
-        } else if (velocity.y >= -20 && velocity.y <= -10) {
-          frameIndex = 2
+        } else if (velocity.y >= -30 && velocity.y <= -10) {
+          animation.frame = 2
         } else if (velocity.y >= -10 && velocity.y < 0) {
-          frameIndex = 3
+          animation.frame = 3
         } else if (velocity.y >= 0) {
-          frameIndex = 4
+          animation.frame = 4
         }
-      } else if (frameAnimation === CatAnimation.DAMAGE) {
-        frameIndex += 0.5
-        if (frameIndex > 10) {
+      } else if (animation.isAnimation(CatAnimation.DAMAGE)) {
+        animation.animate(ANIMATION_SPEED_DAMAGE)
+        if (animation.frame > 10) {
           isDamaged = true
         }
       }
 
-      // image.rect.x = (Math.floor(frameIndex) % 8) * 400
-
       transform.position.x += velocity.x
       transform.position.y += velocity.y
+
+      /*
+      if (collider.hasCollided) {
+        const [id] = collider.collisions
+        const collisionTransform = Component.findByIdAndConstructor(id, TransformComponent)
+        const collisionCollider = Component.findByIdAndConstructor(id, ColliderComponent)
+        if (collisionCollider.tag === CollisionTag.SOLID) { // SOLID
+          // Hacemos una cosa
+        } else if (collisionCollider.tag === CollisionTag.POISON) { // POISON
+
+        } else if (collisionCollider.tag === CollisionTag.MOVABLE) { // MOVABLE
+
+        } else if (collisionCollider.tag === CollisionTag.CHARM) { // CHARM
+
+        }
+      }
+      */
 
       if (collider.hasCollided && velocity.y > 0) {
         const [id] = collider.collisions
@@ -141,21 +172,19 @@ export function* Cat(game, parentVelocity, parentTransform) {
         velocity.y = 0
         transform.position.y = collisionRect.y - collisionRect.height - collider.rect.height / 2
         if (isJumping) {
-          frameAnimation = CatAnimation.WALK
-          frameIndex = 0
+          animation.set(CatAnimation.WALK)
           isJumping = false
         }
       } else if (!collider.hasCollided && transform.position.y < lavaHeight) {
         if (!isJumping) {
-          velocity.y = 0.001
+          velocity.y = 0
           isJumping = true
-          frameAnimation = CatAnimation.JUMP
-          frameIndex = 4
+          animation.set(CatAnimation.JUMP, 4)
         }
         // Aplicamos la gravedad del juego.
-        velocity.y += 0.8
-        if (isJumping && frameIndex >= 3 && transform.position.y > lavaHeight - 50) {
-          frameIndex = 5
+        velocity.y += GRAVITY
+        if (isJumping && animation.frame >= 3 && transform.position.y > lavaHeight - 50) {
+          animation.frame = 5
         }
       } else if (transform.position.y >= lavaHeight) {
         // El gato está en el suelo (su velocidad vertical es 0
@@ -164,47 +193,29 @@ export function* Cat(game, parentVelocity, parentTransform) {
         transform.position.y = lavaHeight
         if (isJumping) {
           isJumping = false
-          frameAnimation = CatAnimation.DAMAGE
-          frameIndex = 0
-
+          animation.set(CatAnimation.DAMAGE)
           parentVelocity.x = 0
           game.sound.play(game.resources.get('sounds/hiss.mp3?taoro:as=audiobuffer'))
         }
       }
-
-      const [startIndex, endIndex] = frameIndices.get(frameAnimation)
-      const count = endIndex - startIndex
-      currentRectIndex = startIndex + (Math.floor(frameIndex) % count)
-      image.rect.copy(imageSheet.rectOf(currentRectIndex))
-
+      image.rect.copy(imageSheet.rectOf(animation.currentFrame))
       yield
     }
 
-    frameAnimation = CatAnimation.WALK
-    frameIndex = 0
+    animation.set(CatAnimation.WALK)
     while (transform.position.x < game.viewport.currentWidth) {
       transform.position.x += 10
-
-      frameIndex += 1
-
-      const [startIndex, endIndex] = frameIndices.get(frameAnimation)
-      const count = endIndex - startIndex
-      currentRectIndex = startIndex + (Math.floor(frameIndex) % count)
-      image.rect.copy(imageSheet.rectOf(currentRectIndex))
-
+      animation.animate()
+      image.rect.copy(imageSheet.rectOf(animation.currentFrame))
       yield
     }
 
     isDamaged = false
     isJumping = true
     isMeowing = false
-    frameAnimation = CatAnimation.JUMP
-    frameIndex = 0
-    currentRectIndex = 0
-    velocity.x = 0
-    velocity.y = 0
-    transform.position.x = 400
-    transform.position.y = 100
+    animation.set(CatAnimation.JUMP, 4)
+    velocity.reset()
+    transform.position.set(400, 100)
     parentTransform.position.x = 0
     parentVelocity.x = -4
 

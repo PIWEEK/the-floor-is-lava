@@ -20,6 +20,7 @@
     "@taoro/math-point": "^1.0.2",
     "@taoro/math-rect": "^1.0.2",
     "@taoro/renderer-2d": "^1.0.3",
+    "@taoro/scheduler": "^1.0.3",
     "@taoro/viewport": "^1.0.2",
     "vue": "^3.3.4"
   },

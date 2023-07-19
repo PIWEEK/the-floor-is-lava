@@ -60,6 +60,13 @@ export async function start(canvas) {
           [InputDevice.GAMEPAD, [0, 0, 3, 1]],
         ],
       ],
+      [
+        'pause',
+        [
+          [InputDevice.KEYBOARD, ['KeyP']],
+          [InputDevice.POINTER, [0, 'MiddleButton']],
+        ],
+      ],
     ]
   })
 
