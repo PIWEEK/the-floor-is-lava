@@ -96,6 +96,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
 
   // Si estamos en modo desarrollo mostramos las cajas
   // de colisión y un texto de debug.
+  let debugTransform, debugCollisionRect
   if (import.meta.env.MODE === 'development') {
     const text = new TextComponent('cat', {
       text: () => `${collider.collisions.size}`,
@@ -108,6 +109,11 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
       strokeStyle: '#f0f',
     })
     rect.rect.copy(collider.rect)
+
+    debugTransform = new TransformComponent('debug-collision-rect', {})
+    debugCollisionRect = new RectComponent('debug-collision-rect', {
+      fillStyle: '#f0f',
+    })
   }
 
   const velocity = new Point(0, 0)
@@ -185,7 +191,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
         }
         */
 
-        if (collider.hasCollided && velocity.y > 0) {
+        if (collider.hasCollided) {
           const [id] = collider.collisions
           const collisionTransform = Component.findByIdAndConstructor(id, TransformComponent)
           const collisionCollider = Component.findByIdAndConstructor(id, ColliderComponent)
@@ -194,20 +200,37 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
             .copy(collisionCollider.rect)
             .translatePoint(collisionTransform.position)
 
-          velocity.reset()
-          transform.position.y = collisionRect.y - collisionRect.height - collider.rect.height / 2
-          if (isJumping) {
-            isJumping = false
-            animation.set(CatAnimation.WALK)
-            if (Math.random() > 0.85) {
-              isMeowing = true
-              game.sound.play(game.resources.get('sounds/meow.wav?taoro:as=audiobuffer'), {
-                playbackRate: 1 + Math.random() * 0.5,
-                onEnded: () => (isMeowing = false),
-              })
+          debugCollisionRect.rect.copy(collisionRect)
+
+          if (velocity.y > 0) {
+            velocity.reset()
+
+            // FIXME: Aquí hay algo MUY raro que hace que las colisiones
+            // salga un poco "pochas".
+            // Realmente la fórmula debería ser:
+            //
+            // transform.position.y = collisionRect.y - collider.rect.height
+            //
+            transform.position.y = collisionRect.y - collisionRect.height - collider.rect.height / 2
+            if (isJumping) {
+              isJumping = false
+              animation.set(CatAnimation.WALK)
+              if (Math.random() > 0.85) {
+                isMeowing = true
+                game.sound.play(game.resources.get('sounds/meow.wav?taoro:as=audiobuffer'), {
+                  playbackRate: 1 + Math.random() * 0.5,
+                  onEnded: () => (isMeowing = false),
+                })
+              }
             }
           }
-        } else if (!collider.hasCollided && transform.position.y < LAVA_Y) {
+        }
+
+        if (!collider.hasCollided) {
+          debugCollisionRect.rect.reset()
+        }
+
+        if (!collider.hasCollided && transform.position.y < LAVA_Y) {
           if (!isJumping) {
             isJumping = true
             velocity.reset()
@@ -218,7 +241,9 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
             animation.frame = ANIMATION_JUMP__LANDING
           }
           velocity.y += GRAVITY
-        } else if (transform.position.y >= LAVA_Y) {
+        }
+
+        if (transform.position.y >= LAVA_Y) {
           // El gato está en el suelo (su velocidad vertical es 0
           // y su posición vertical es igual a la mitad de la altura de la pantalla).
           velocity.reset()
