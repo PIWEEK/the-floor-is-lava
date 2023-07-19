@@ -23,7 +23,7 @@ export async function * Level(game, levelIndex) {
   const velocity = new Point(LEVEL_SPEED, 0)
   const gameState = {
     pauseStart: 0,
-    isPaused: false
+    isPaused: false,
   }
 
   const transform = new TransformComponent('level', {
@@ -33,35 +33,32 @@ export async function * Level(game, levelIndex) {
 
   // Cargamos el archivo de nivel.
   await game.resources.load(`levels/${levelId}/level.json`)
-
-  // Cargamos las diferentes capas del nivel.
-  const { layers, music, background } = game.resources.get(`levels/${levelId}/level.json`)
+  // Cargamos los datos del nivel, la música de fondo
+  // y la imagen de fondo.
+  const { layers, music, background } = game.resources.get(
+    `levels/${levelId}/level.json`
+  )
   game.resources.load(`levels/${levelId}/${music}?taoro:as=audiobuffer`)
   game.resources.load(`levels/${levelId}/${background}`)
+  // Cargamos todos los símbolos del nivel.
   for (const layer of layers) {
     for (const symbol of layer.symbols) {
       game.resources.load(`levels/${levelId}/symbols/${symbol.name}.png`)
     }
   }
 
+  // Esperamos a que todo se cargue.
   await game.resources.all()
 
+  // Añadimos los componentes de la imagen de fondo.
   const backgroundTransform = new TransformComponent('background')
-
   const backgroundImage = new ImageComponent('background', {
     source: game.resources.get(`levels/${levelId}/${background}`),
   })
 
-  while (game.resources.loaded < game.resources.total) {
-    yield
-  }
-
-  game.music.a.buffer = game.resources.get(
-    `levels/${levelId}/${music}?taoro:as=audiobuffer`
-  )
-  game.music.a.start()
-
-  //
+  // Aquí creamos todos los elementos del nivel a partir de las capas
+  // que hemos creado con el exportador. De momento hay cuatro capas
+  // que se identifican por: `siluetas`, `primer plano`, `
   for (let index = 0; index < LEVEL_MAX_LAYERS; index++) {
     const layer = layers[index]
     for (const instance of layer.instances) {
@@ -72,17 +69,22 @@ export async function * Level(game, levelIndex) {
         LevelSymbol(game, transform, instance, symbol, levelId, layer.parallax)
       )
     }
-
     if (index === LEVEL_CAT_LAYER) {
       game.scheduler.add(Cat(game, velocity, transform, gameState))
     }
   }
 
+  // Arrancamos la música.
+  game.music.a.buffer = game.resources.get(
+    `levels/${levelId}/${music}?taoro:as=audiobuffer`
+  )
+  game.music.a.start()
+
+  transform.position.reset()
+  velocity.set(LEVEL_SPEED, 0)
+  // Bucle principal del juego que se encargará de actualizar la posición
+  // del scroll.
   while (true) {
-    if(game.input.stateOf(0, 'pause') && performance.now() - gameState.pauseStart >= 500) {
-      gameState.pauseStart = performance.now()
-      gameState.isPaused = !gameState.isPaused
-    }
     if (velocity.x < LEVEL_SPEED) {
       velocity.x += LEVEL_DECELERATION
     }
@@ -94,5 +96,4 @@ export async function * Level(game, levelIndex) {
 
   backgroundTransform.unregister()
   backgroundImage.unregister()
-
 }
