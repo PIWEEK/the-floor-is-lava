@@ -3,12 +3,14 @@ import { TransformComponent } from '@taoro/component-transform-2d'
 import { ImageComponent } from '@taoro/renderer-2d'
 import { LevelSymbol } from './LevelSymbol.js'
 import { Cat } from './Cat.js'
+import { LevelEnd } from './LevelEnd.js'
 
-const LEVEL_SPEED = -4
-const LEVEL_DECELERATION = 0.1
+const LEVEL_SPEED = -8
+const LEVEL_DECELERATION = 0.2
 
 const LEVEL_MAX_LAYERS = 4
 const LEVEL_CAT_LAYER = 2
+const LEVEL_END_LAYER = 0
 
 /**
  * La tarea del nivel es la responsable de controlar la velocidad
@@ -22,7 +24,9 @@ export async function * Level(game, levelIndex) {
 
   const velocity = new Point(LEVEL_SPEED, 0)
   const gameState = {
+    charms: 0,
     pauseStart: 0,
+    isEnded: false,
     isPaused: false,
   }
 
@@ -67,16 +71,20 @@ export async function * Level(game, levelIndex) {
   // que se identifican por: `siluetas`, `primer plano`, `
   for (let index = 0; index < LEVEL_MAX_LAYERS; index++) {
     const layer = layers[index]
+    if (index === LEVEL_END_LAYER) {
+      game.scheduler.add(LevelEnd(game, gameState, transform, velocity, layer.size.width))
+    }
+
     for (const instance of layer.instances) {
       const symbol = layer.symbols.find(
         (symbol) => symbol.guid === instance.symbol
       )
       game.scheduler.add(
-        LevelSymbol(game, transform, instance, symbol, levelId, layer.parallax)
+        LevelSymbol(game, gameState, transform, instance, symbol, levelId, layer.parallax)
       )
     }
     if (index === LEVEL_CAT_LAYER) {
-      game.scheduler.add(Cat(game, velocity, transform, gameState))
+      game.scheduler.add(Cat(game, gameState, velocity, transform))
     }
   }
 
@@ -91,10 +99,12 @@ export async function * Level(game, levelIndex) {
   // Bucle principal del juego que se encargará de actualizar la posición
   // del scroll.
   while (true) {
-    if (velocity.x < LEVEL_SPEED) {
-      velocity.x += LEVEL_DECELERATION
+    if (transform.position.x < layers[LEVEL_END_LAYER].size.width) {
+      if (velocity.x < LEVEL_SPEED) {
+        velocity.x += LEVEL_DECELERATION
+      }
+      transform.position.x += velocity.x
     }
-    transform.position.x += velocity.x
     yield
   }
 

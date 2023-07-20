@@ -12,16 +12,19 @@
         {
           "guid": "484_220307",
           "name": "sombrero",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220325",
           "name": "cuadros-e",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220486",
           "name": "accesorios-a",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -30,7 +33,7 @@
               },
               "size": {
                 "width": 264,
-                "height": 104
+                "height": 40
               }
             }
           ]
@@ -38,56 +41,78 @@
         {
           "guid": "484_220565",
           "name": "ventana-c",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220589",
           "name": "ventana-a",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220588",
           "name": "cuadros-d",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220587",
           "name": "vinilos",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220586",
           "name": "planta-e",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_221083",
           "name": "cuadros-c",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_222112",
           "name": "planta-d",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_225295",
           "name": "ventana-b",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_225152",
           "name": "aire",
-          "colliders": []
+          "type": "solid",
+          "colliders": [
+            {
+              "position": {
+                "x": 3,
+                "y": 0
+              },
+              "size": {
+                "width": 394,
+                "height": 40
+              }
+            }
+          ]
         },
         {
           "guid": "511_28745",
           "name": "cuadros-a",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "627_45353",
           "name": "estantería-c",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -96,7 +121,7 @@
               },
               "size": {
                 "width": 276,
-                "height": 105
+                "height": 40
               }
             }
           ]
@@ -104,6 +129,7 @@
         {
           "guid": "627_45353",
           "name": "estantería-c",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -112,39 +138,7 @@
               },
               "size": {
                 "width": 276,
-                "height": 105
-              }
-            }
-          ]
-        },
-        {
-          "guid": "627_45353",
-          "name": "estantería-c",
-          "colliders": [
-            {
-              "position": {
-                "x": -1,
-                "y": 100
-              },
-              "size": {
-                "width": 276,
-                "height": 105
-              }
-            }
-          ]
-        },
-        {
-          "guid": "627_45353",
-          "name": "estantería-c",
-          "colliders": [
-            {
-              "position": {
-                "x": -1,
-                "y": 100
-              },
-              "size": {
-                "width": 276,
-                "height": 105
+                "height": 40
               }
             }
           ]
@@ -152,17 +146,71 @@
         {
           "guid": "685_71328",
           "name": "cuadros-b",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "685_89078",
           "name": "organizador",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "831_5592",
           "name": "cámara",
+          "type": "solid",
           "colliders": []
+        },
+        {
+          "guid": "627_70720",
+          "name": "estantería-b",
+          "type": "solid",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 75
+              },
+              "size": {
+                "width": 269,
+                "height": 40
+              }
+            }
+          ]
+        },
+        {
+          "guid": "897_7024",
+          "name": "charm-c",
+          "type": "charm",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "size": {
+                "width": 55,
+                "height": 84
+              }
+            }
+          ]
+        },
+        {
+          "guid": "897_7028",
+          "name": "charm-g",
+          "type": "charm",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "size": {
+                "width": 84,
+                "height": 62
+              }
+            }
+          ]
         }
       ],
       "instances": [
@@ -197,7 +245,7 @@
         {
           "symbol": "484_220589",
           "position": {
-            "x": 2288,
+            "x": 2258,
             "y": 143
           }
         },
@@ -225,7 +273,7 @@
         {
           "symbol": "484_221083",
           "position": {
-            "x": 2804,
+            "x": 2884,
             "y": 261
           }
         },
@@ -246,8 +294,8 @@
         {
           "symbol": "484_225152",
           "position": {
-            "x": 2621,
-            "y": 28
+            "x": 2521,
+            "y": 48
           }
         },
         {
@@ -267,22 +315,8 @@
         {
           "symbol": "627_45353",
           "position": {
-            "x": 11723,
-            "y": 121
-          }
-        },
-        {
-          "symbol": "627_45353",
-          "position": {
-            "x": 12063,
-            "y": 459
-          }
-        },
-        {
-          "symbol": "627_45353",
-          "position": {
-            "x": 12150,
-            "y": 253
+            "x": 11879,
+            "y": 400
           }
         },
         {
@@ -305,6 +339,27 @@
             "x": 14227,
             "y": 339
           }
+        },
+        {
+          "symbol": "627_70720",
+          "position": {
+            "x": 12156,
+            "y": 253
+          }
+        },
+        {
+          "symbol": "897_7024",
+          "position": {
+            "x": 9745,
+            "y": 314
+          }
+        },
+        {
+          "symbol": "897_7028",
+          "position": {
+            "x": 2787,
+            "y": 6
+          }
         }
       ]
     },
@@ -318,25 +373,26 @@
         {
           "guid": "484_220246",
           "name": "armario",
+          "type": "solid",
           "colliders": [
             {
               "position": {
-                "x": 0,
+                "x": 69,
                 "y": 0
               },
               "size": {
-                "width": 287,
-                "height": 96
+                "width": 217,
+                "height": 40
               }
             },
             {
               "position": {
-                "x": 287,
-                "y": 17
+                "x": 286,
+                "y": 18
               },
               "size": {
-                "width": 283,
-                "height": 78
+                "width": 212,
+                "height": 40
               }
             }
           ]
@@ -344,15 +400,16 @@
         {
           "guid": "484_220281",
           "name": "bicicleta",
+          "type": "solid",
           "colliders": [
             {
               "position": {
                 "x": 204,
-                "y": 60
+                "y": 46
               },
               "size": {
                 "width": 230,
-                "height": 91
+                "height": 40
               }
             }
           ]
@@ -360,6 +417,7 @@
         {
           "guid": "484_220353",
           "name": "banco",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -368,7 +426,7 @@
               },
               "size": {
                 "width": 436,
-                "height": 105
+                "height": 40
               }
             }
           ]
@@ -376,32 +434,19 @@
         {
           "guid": "484_220378",
           "name": "planta-f",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220389",
           "name": "puerta-a",
+          "type": "solid",
           "colliders": []
-        },
-        {
-          "guid": "484_220419",
-          "name": "cocina",
-          "colliders": [
-            {
-              "position": {
-                "x": -1,
-                "y": 0
-              },
-              "size": {
-                "width": 1262,
-                "height": 83
-              }
-            }
-          ]
         },
         {
           "guid": "484_220520",
           "name": "nevera",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -410,7 +455,7 @@
               },
               "size": {
                 "width": 231,
-                "height": 88
+                "height": 40
               }
             }
           ]
@@ -418,6 +463,7 @@
         {
           "guid": "484_220551",
           "name": "silla-c",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -426,7 +472,7 @@
               },
               "size": {
                 "width": 152,
-                "height": 36
+                "height": 40
               }
             }
           ]
@@ -434,6 +480,7 @@
         {
           "guid": "484_220861",
           "name": "tocadiscos",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -442,17 +489,17 @@
               },
               "size": {
                 "width": 429,
-                "height": 84
+                "height": 40
               }
             },
             {
               "position": {
-                "x": 443,
+                "x": 442,
                 "y": 22
               },
               "size": {
-                "width": 135,
-                "height": 78
+                "width": 136,
+                "height": 40
               }
             }
           ]
@@ -460,6 +507,7 @@
         {
           "guid": "484_220862",
           "name": "sillón",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -468,7 +516,7 @@
               },
               "size": {
                 "width": 329,
-                "height": 75
+                "height": 40
               }
             }
           ]
@@ -476,11 +524,13 @@
         {
           "guid": "484_220870",
           "name": "planta-a",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220869",
           "name": "sofá",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -489,7 +539,7 @@
               },
               "size": {
                 "width": 664,
-                "height": 80
+                "height": 40
               }
             }
           ]
@@ -497,26 +547,31 @@
         {
           "guid": "484_220868",
           "name": "guitarra",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220867",
           "name": "estantería-a",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220866",
           "name": "planta-b",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_222151",
           "name": "planta-c",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_222176",
           "name": "silla-b",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -525,7 +580,7 @@
               },
               "size": {
                 "width": 152,
-                "height": 36
+                "height": 40
               }
             }
           ]
@@ -533,11 +588,24 @@
         {
           "guid": "511_107292",
           "name": "maletas",
-          "colliders": []
+          "type": "solid",
+          "colliders": [
+            {
+              "position": {
+                "x": 28,
+                "y": 1
+              },
+              "size": {
+                "width": 314,
+                "height": 40
+              }
+            }
+          ]
         },
         {
           "guid": "685_70257",
           "name": "carrito",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -546,7 +614,7 @@
               },
               "size": {
                 "width": 198,
-                "height": 89
+                "height": 40
               }
             }
           ]
@@ -554,52 +622,169 @@
         {
           "guid": "685_78426",
           "name": "mesa-b",
-          "colliders": []
-        },
-        {
-          "guid": "484_225439",
-          "name": "radiador",
-          "colliders": [
-            {
-              "position": {
-                "x": -1,
-                "y": 12
-              },
-              "size": {
-                "width": 249,
-                "height": 70
-              }
-            }
-          ]
-        },
-        {
-          "guid": "627_45353",
-          "name": "estantería-c",
-          "colliders": [
-            {
-              "position": {
-                "x": -1,
-                "y": 100
-              },
-              "size": {
-                "width": 276,
-                "height": 105
-              }
-            }
-          ]
-        },
-        {
-          "guid": "484_222176",
-          "name": "silla-b",
+          "type": "solid",
           "colliders": [
             {
               "position": {
                 "x": 0,
-                "y": 128
+                "y": 175
               },
               "size": {
-                "width": 152,
-                "height": 36
+                "width": 566,
+                "height": 40
+              }
+            }
+          ]
+        },
+        {
+          "guid": "484_225439",
+          "name": "radiador",
+          "type": "solid",
+          "colliders": [
+            {
+              "position": {
+                "x": -1,
+                "y": 14
+              },
+              "size": {
+                "width": 249,
+                "height": 40
+              }
+            }
+          ]
+        },
+        {
+          "guid": "685_70257",
+          "name": "carrito",
+          "type": "solid",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 5
+              },
+              "size": {
+                "width": 198,
+                "height": 40
+              }
+            }
+          ]
+        },
+        {
+          "guid": "685_78426",
+          "name": "mesa-b",
+          "type": "solid",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 175
+              },
+              "size": {
+                "width": 566,
+                "height": 40
+              }
+            }
+          ]
+        },
+        {
+          "guid": "896_10275",
+          "name": "escalera",
+          "type": "solid",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 414
+              },
+              "size": {
+                "width": 224,
+                "height": 30
+              }
+            }
+          ]
+        },
+        {
+          "guid": "897_7026",
+          "name": "charm-e",
+          "type": "charm",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "size": {
+                "width": 98,
+                "height": 67
+              }
+            }
+          ]
+        },
+        {
+          "guid": "897_7027",
+          "name": "charm-f",
+          "type": "charm",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "size": {
+                "width": 132,
+                "height": 55
+              }
+            }
+          ]
+        },
+        {
+          "guid": "897_7025",
+          "name": "charm-d",
+          "type": "charm",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "size": {
+                "width": 116,
+                "height": 72
+              }
+            }
+          ]
+        },
+        {
+          "guid": "897_7023",
+          "name": "charm-b",
+          "type": "charm",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "size": {
+                "width": 55,
+                "height": 55
+              }
+            }
+          ]
+        },
+        {
+          "guid": "484_220419",
+          "name": "cocina",
+          "type": "solid",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 131
+              },
+              "size": {
+                "width": 1262,
+                "height": 40
               }
             }
           ]
@@ -639,13 +824,6 @@
           "position": {
             "x": 14811,
             "y": 197
-          }
-        },
-        {
-          "symbol": "484_220419",
-          "position": {
-            "x": 7146,
-            "y": 434
           }
         },
         {
@@ -721,7 +899,7 @@
         {
           "symbol": "484_222176",
           "position": {
-            "x": 5326,
+            "x": 5346,
             "y": 479
           }
         },
@@ -749,22 +927,64 @@
         {
           "symbol": "484_225439",
           "position": {
-            "x": 2275,
+            "x": 2245,
             "y": 548
           }
         },
         {
-          "symbol": "627_45353",
+          "symbol": "685_70257",
           "position": {
-            "x": 5834,
-            "y": 559
+            "x": 8933,
+            "y": 517
           }
         },
         {
-          "symbol": "484_222176",
+          "symbol": "685_78426",
           "position": {
-            "x": 6454,
+            "x": 5898,
+            "y": 354
+          }
+        },
+        {
+          "symbol": "896_10275",
+          "position": {
+            "x": 11357,
+            "y": 208
+          }
+        },
+        {
+          "symbol": "897_7026",
+          "position": {
+            "x": 11390,
+            "y": 488
+          }
+        },
+        {
+          "symbol": "897_7027",
+          "position": {
+            "x": 8252,
             "y": 470
+          }
+        },
+        {
+          "symbol": "897_7025",
+          "position": {
+            "x": 13638,
+            "y": -3
+          }
+        },
+        {
+          "symbol": "897_7023",
+          "position": {
+            "x": 12782,
+            "y": 374
+          }
+        },
+        {
+          "symbol": "484_220419",
+          "position": {
+            "x": 7146,
+            "y": 435
           }
         }
       ]
@@ -779,11 +999,13 @@
         {
           "guid": "484_221097",
           "name": "silla-d",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_221096",
           "name": "mesa-a",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -792,7 +1014,7 @@
               },
               "size": {
                 "width": 566,
-                "height": 83
+                "height": 40
               }
             }
           ]
@@ -800,11 +1022,13 @@
         {
           "guid": "484_221095",
           "name": "lámpara-b",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_221094",
           "name": "lámpara-a",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -813,7 +1037,7 @@
               },
               "size": {
                 "width": 210,
-                "height": 71
+                "height": 40
               }
             }
           ]
@@ -821,19 +1045,21 @@
         {
           "guid": "484_221093",
           "name": "mesa-c",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_221314",
           "name": "alfombra-a",
+          "type": "solid",
           "colliders": [
             {
               "position": {
                 "x": 0,
-                "y": 80
+                "y": 44
               },
               "size": {
-                "width": 1082,
+                "width": 1757,
                 "height": 83
               }
             }
@@ -842,16 +1068,19 @@
         {
           "guid": "484_221407",
           "name": "alfombra-b",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220412",
           "name": "alfombra-c",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "511_36378",
           "name": "isla",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -860,38 +1089,47 @@
               },
               "size": {
                 "width": 638,
-                "height": 81
+                "height": 40
               }
             }
           ]
         },
         {
-          "guid": "484_221097",
-          "name": "silla-d",
-          "colliders": []
-        },
-        {
           "guid": "685_78427",
           "name": "silla-e",
+          "type": "solid",
           "colliders": []
         },
         {
-          "guid": "484_221093",
-          "name": "mesa-c",
-          "colliders": []
-        },
-        {
-          "guid": "484_221096",
-          "name": "mesa-a",
+          "guid": "511_81492",
+          "name": "monopatín",
+          "type": "solid",
           "colliders": [
             {
               "position": {
                 "x": 0,
-                "y": 142
+                "y": 13
               },
               "size": {
-                "width": 566,
-                "height": 83
+                "width": 369,
+                "height": 40
+              }
+            }
+          ]
+        },
+        {
+          "guid": "897_7022",
+          "name": "charm-a",
+          "type": "charm",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "size": {
+                "width": 137,
+                "height": 43
               }
             }
           ]
@@ -901,21 +1139,21 @@
         {
           "symbol": "484_221097",
           "position": {
-            "x": 2789,
-            "y": 558
+            "x": 2869,
+            "y": 561
           }
         },
         {
           "symbol": "484_221096",
           "position": {
-            "x": 2876,
+            "x": 2948,
             "y": 497
           }
         },
         {
           "symbol": "484_221095",
           "position": {
-            "x": 3195,
+            "x": 3275,
             "y": -1
           }
         },
@@ -936,8 +1174,8 @@
         {
           "symbol": "484_221314",
           "position": {
-            "x": 0,
-            "y": 788
+            "x": -360,
+            "y": 838
           }
         },
         {
@@ -962,13 +1200,6 @@
           }
         },
         {
-          "symbol": "484_221097",
-          "position": {
-            "x": 3529,
-            "y": 558
-          }
-        },
-        {
           "symbol": "685_78427",
           "position": {
             "x": 10511,
@@ -976,17 +1207,17 @@
           }
         },
         {
-          "symbol": "484_221093",
+          "symbol": "511_81492",
           "position": {
-            "x": 5792,
-            "y": 810
+            "x": 5145,
+            "y": 785
           }
         },
         {
-          "symbol": "484_221096",
+          "symbol": "897_7022",
           "position": {
-            "x": 9022,
-            "y": 451
+            "x": 5261,
+            "y": 772
           }
         }
       ]
@@ -1001,26 +1232,31 @@
         {
           "guid": "669_22527",
           "name": "silueta-mesa",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "669_22528",
           "name": "silueta-silla",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "669_22529",
           "name": "silueta-guitarra",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "669_22532",
           "name": "silueta-sofá",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "669_22533",
           "name": "silueta-comedor",
+          "type": "solid",
           "colliders": []
         }
       ],

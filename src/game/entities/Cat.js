@@ -9,17 +9,17 @@ import { CatAnimation } from '~/game/constants/CatAnimation.js'
 import { CollisionTag } from '~/game/constants/CollisionTag.js'
 import { ColliderComponent } from '~/game/systems/Collider.js'
 
-const GRAVITY = 0.8
+const GRAVITY = 1
 
 const LAVA_Y = 900
 
-const CAT_MIN_JUMP_SPEED = 10
-const CAT_MAX_JUMP_SPEED = 30
-const CAT_MIN_X_SPEED = 5
-const CAT_MAX_X_SPEED = 10
+const CAT_MIN_JUMP_SPEED = 15
+const CAT_MAX_JUMP_SPEED = 25
+const CAT_MIN_X_SPEED = 10
+const CAT_MAX_X_SPEED = 20
 
-const CAT_INITIAL_X = 200
-const CAT_INITIAL_Y = 0
+const CAT_INITIAL_X = 800
+const CAT_INITIAL_Y = 800
 
 const CAT_SPEED_DAMAGED = 10
 const CAT_ANIMATION_FRAMES = 16
@@ -55,16 +55,16 @@ function createAnimationRects(source, numRects = CAT_ANIMATION_FRAMES) {
 /**
  * Cat.
  */
-export function* Cat(game, parentVelocity, parentTransform, gameState) {
+export function* Cat(game, gameState, parentVelocity, parentTransform) {
   const transform = new TransformComponent('cat', {
     x: CAT_INITIAL_X,
     y: CAT_INITIAL_Y,
   })
 
   const collider = new ColliderComponent('cat', {
-    rects: [new Rect(0, 0, 160, 20)],
+    rects: [new Rect(0, 0, 180, 40)],
     tag: CollisionTag.CAT,
-    collidesWithTag: CollisionTag.SOLID
+    targetTag: CollisionTag.SOLID
   })
 
   const cat = game.resources.get('images/gato.png')
@@ -80,7 +80,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
   const image = new ImageComponent('cat', {
     source: cat,
     rect: new Rect(),
-    pivot: new Point(-100, -175),
+    pivot: new Point(-40, -100),
   })
   image.rect.copy(imageSheet.rectOf(0))
 
@@ -174,24 +174,13 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
             animation.frame = ANIMATION_JUMP__FALLING
           }
         }
-        /*
-        if (collider.hasCollided) {
-          const [id] = collider.collisions
-          const collisionTransform = Component.findByIdAndConstructor(id, TransformComponent)
-          const collisionCollider = Component.findByIdAndConstructor(id, ColliderComponent)
-          if (collisionCollider.tag === CollisionTag.SOLID) { // SOLID
-            // Hacemos una cosa
-          } else if (collisionCollider.tag === CollisionTag.POISON) { // POISON
 
-          } else if (collisionCollider.tag === CollisionTag.MOVABLE) { // MOVABLE
-
-          } else if (collisionCollider.tag === CollisionTag.CHARM) { // CHARM
-
-          }
+        if (collider.collidesWithTag(CollisionTag.END)) {
+          gameState.isEnded = true
+          break
         }
-        */
 
-        if (collider.hasCollided) {
+        if (collider.collidesWithTag(CollisionTag.SOLID)) {
           const [collision] = collider.collisions
 
           if (debugCollisionRect) {
@@ -222,13 +211,13 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
           }
         }
 
-        if (!collider.hasCollided) {
+        if (!collider.collidesWithTag(CollisionTag.SOLID)) {
           if (debugCollisionRect) {
             debugCollisionRect.rect.reset()
           }
         }
 
-        if (!collider.hasCollided && transform.position.y < LAVA_Y) {
+        if (!collider.collidesWithTag(CollisionTag.SOLID) && transform.position.y < LAVA_Y) {
           if (!isJumping) {
             isJumping = true
             velocity.reset()
@@ -268,6 +257,13 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
       yield
     }
 
+    while (transform.position.y < LAVA_Y) {
+      velocity.y += GRAVITY
+      transform.position.add(velocity)
+      yield
+    }
+    transform.position.y = LAVA_Y
+
     /**
      * Cuando salimos del bucle principal, entramos
      * en el bucle de animación de daño.
@@ -275,22 +271,28 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
     animation.set(CatAnimation.WALK)
     velocity.reset()
     while (transform.position.x < game.viewport.currentWidth) {
-      velocity.x += 1
+      if (gameState.isEnded) {
+        velocity.x += 0.1
+      } else {
+        velocity.x += 1
+      }
       transform.position.add(velocity)
       animation.animate()
       image.rect.copy(imageSheet.rectOf(animation.currentFrame))
       yield
     }
 
-    isDamaged = false
-    isRunning = false
-    isJumping = true
-    isMeowing = false
-    animation.set(CatAnimation.JUMP, 4)
-    velocity.reset()
-    transform.position.set(CAT_INITIAL_X, CAT_INITIAL_Y)
-    parentTransform.position.x = 0
-    parentVelocity.x = -4
+    if (!gameState.isEnded) {
+      isDamaged = false
+      isRunning = false
+      isJumping = true
+      isMeowing = false
+      animation.set(CatAnimation.JUMP, 4)
+      velocity.reset()
+      transform.position.set(CAT_INITIAL_X, CAT_INITIAL_Y)
+      parentTransform.position.x = 0
+      parentVelocity.x = -4
+    }
 
     yield
   }

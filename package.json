@@ -21,6 +21,7 @@
     "@taoro/game": "^1.0.2",
     "@taoro/image-sheet": "^1.0.4",
     "@taoro/input": "^1.0.2",
+    "@taoro/math-interpolation": "^1.0.2",
     "@taoro/math-point": "^1.0.2",
     "@taoro/math-rect": "^1.0.2",
     "@taoro/pool": "^1.0.2",

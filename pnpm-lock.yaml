@@ -29,6 +29,9 @@ dependencies:
   '@taoro/input':
     specifier: ^1.0.2
     version: 1.0.2
+  '@taoro/math-interpolation':
+    specifier: ^1.0.2
+    version: 1.0.2
   '@taoro/math-point':
     specifier: ^1.0.2
     version: 1.0.2
@@ -427,6 +430,10 @@ packages:
     resolution: {integrity: sha512-04+LEtPCNqSXCs1wheziz7Wuuv5AaB12ohWnktoijK6bI0GCx8OteHcvvsMYQo6kRADtCAbXUJ6HRGKvHRu92A==}
     dependencies:
       '@taoro/runnable': 1.0.2
+    dev: false
+
+  /@taoro/math-interpolation@1.0.2:
+    resolution: {integrity: sha512-sEkluGmXLwjJHVzqkWb/hzY5VvpwOFlG/W5NLY3xojfwr2UAaazchbDVKvYITL20yr9HZod4gy7scXm02+tttQ==}
     dev: false
 
   /@taoro/math-matrix-2d@1.0.2:
