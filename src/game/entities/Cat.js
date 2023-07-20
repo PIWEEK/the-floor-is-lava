@@ -18,7 +18,7 @@ const CAT_MAX_JUMP_SPEED = 25
 const CAT_MIN_X_SPEED = 10
 const CAT_MAX_X_SPEED = 20
 
-const CAT_INITIAL_X = 20
+const CAT_INITIAL_X = 800
 const CAT_INITIAL_Y = 800
 
 const CAT_SPEED_DAMAGED = 10
