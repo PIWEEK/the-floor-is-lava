@@ -9,17 +9,17 @@ import { CatAnimation } from '~/game/constants/CatAnimation.js'
 import { CollisionTag } from '~/game/constants/CollisionTag.js'
 import { ColliderComponent } from '~/game/systems/Collider.js'
 
-const GRAVITY = 0.8
+const GRAVITY = 1
 
 const LAVA_Y = 900
 
-const CAT_MIN_JUMP_SPEED = 10
-const CAT_MAX_JUMP_SPEED = 30
-const CAT_MIN_X_SPEED = 5
-const CAT_MAX_X_SPEED = 10
+const CAT_MIN_JUMP_SPEED = 15
+const CAT_MAX_JUMP_SPEED = 25
+const CAT_MIN_X_SPEED = 10
+const CAT_MAX_X_SPEED = 20
 
-const CAT_INITIAL_X = 200
-const CAT_INITIAL_Y = 0
+const CAT_INITIAL_X = 20
+const CAT_INITIAL_Y = 800
 
 const CAT_SPEED_DAMAGED = 10
 const CAT_ANIMATION_FRAMES = 16
@@ -62,7 +62,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
   })
 
   const collider = new ColliderComponent('cat', {
-    rects: [new Rect(0, 0, 160, 20)],
+    rects: [new Rect(0, 0, 180, 40)],
     tag: CollisionTag.CAT,
     collidesWithTag: CollisionTag.SOLID
   })
@@ -79,7 +79,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
   const image = new ImageComponent('cat', {
     source: cat,
     rect: new Rect(),
-    pivot: new Point(-100, -175),
+    pivot: new Point(-40, -100),
   })
   image.rect.copy(imageSheet.rectOf(0))
 

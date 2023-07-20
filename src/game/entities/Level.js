@@ -4,8 +4,8 @@ import { ImageComponent } from '@taoro/renderer-2d'
 import { LevelSymbol } from './LevelSymbol.js'
 import { Cat } from './Cat.js'
 
-const LEVEL_SPEED = -4
-const LEVEL_DECELERATION = 0.1
+const LEVEL_SPEED = -8
+const LEVEL_DECELERATION = 0.2
 
 const LEVEL_MAX_LAYERS = 4
 const LEVEL_CAT_LAYER = 2

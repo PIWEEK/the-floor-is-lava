@@ -30,7 +30,7 @@
               },
               "size": {
                 "width": 264,
-                "height": 104
+                "height": 40
               }
             }
           ]
@@ -78,7 +78,18 @@
         {
           "guid": "484_225152",
           "name": "aire",
-          "colliders": []
+          "colliders": [
+            {
+              "position": {
+                "x": 3,
+                "y": 0
+              },
+              "size": {
+                "width": 394,
+                "height": 40
+              }
+            }
+          ]
         },
         {
           "guid": "511_28745",
@@ -96,7 +107,7 @@
               },
               "size": {
                 "width": 276,
-                "height": 105
+                "height": 40
               }
             }
           ]
@@ -112,39 +123,7 @@
               },
               "size": {
                 "width": 276,
-                "height": 105
-              }
-            }
-          ]
-        },
-        {
-          "guid": "627_45353",
-          "name": "estantería-c",
-          "colliders": [
-            {
-              "position": {
-                "x": -1,
-                "y": 100
-              },
-              "size": {
-                "width": 276,
-                "height": 105
-              }
-            }
-          ]
-        },
-        {
-          "guid": "627_45353",
-          "name": "estantería-c",
-          "colliders": [
-            {
-              "position": {
-                "x": -1,
-                "y": 100
-              },
-              "size": {
-                "width": 276,
-                "height": 105
+                "height": 40
               }
             }
           ]
@@ -163,6 +142,22 @@
           "guid": "831_5592",
           "name": "cámara",
           "colliders": []
+        },
+        {
+          "guid": "627_70720",
+          "name": "estantería-b",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 75
+              },
+              "size": {
+                "width": 269,
+                "height": 40
+              }
+            }
+          ]
         }
       ],
       "instances": [
@@ -267,22 +262,8 @@
         {
           "symbol": "627_45353",
           "position": {
-            "x": 11723,
-            "y": 121
-          }
-        },
-        {
-          "symbol": "627_45353",
-          "position": {
             "x": 12063,
             "y": 459
-          }
-        },
-        {
-          "symbol": "627_45353",
-          "position": {
-            "x": 12150,
-            "y": 253
           }
         },
         {
@@ -305,6 +286,13 @@
             "x": 14227,
             "y": 339
           }
+        },
+        {
+          "symbol": "627_70720",
+          "position": {
+            "x": 12156,
+            "y": 253
+          }
         }
       ]
     },
@@ -326,7 +314,7 @@
               },
               "size": {
                 "width": 287,
-                "height": 96
+                "height": 40
               }
             },
             {
@@ -336,7 +324,7 @@
               },
               "size": {
                 "width": 283,
-                "height": 78
+                "height": 40
               }
             }
           ]
@@ -348,11 +336,11 @@
             {
               "position": {
                 "x": 204,
-                "y": 60
+                "y": 46
               },
               "size": {
                 "width": 230,
-                "height": 91
+                "height": 40
               }
             }
           ]
@@ -368,7 +356,7 @@
               },
               "size": {
                 "width": 436,
-                "height": 105
+                "height": 40
               }
             }
           ]
@@ -389,12 +377,12 @@
           "colliders": [
             {
               "position": {
-                "x": -1,
-                "y": 0
+                "x": 0,
+                "y": 131
               },
               "size": {
                 "width": 1262,
-                "height": 83
+                "height": 40
               }
             }
           ]
@@ -410,7 +398,7 @@
               },
               "size": {
                 "width": 231,
-                "height": 88
+                "height": 40
               }
             }
           ]
@@ -426,7 +414,7 @@
               },
               "size": {
                 "width": 152,
-                "height": 36
+                "height": 40
               }
             }
           ]
@@ -442,17 +430,17 @@
               },
               "size": {
                 "width": 429,
-                "height": 84
+                "height": 40
               }
             },
             {
               "position": {
-                "x": 443,
+                "x": 442,
                 "y": 22
               },
               "size": {
-                "width": 135,
-                "height": 78
+                "width": 136,
+                "height": 40
               }
             }
           ]
@@ -468,7 +456,7 @@
               },
               "size": {
                 "width": 329,
-                "height": 75
+                "height": 40
               }
             }
           ]
@@ -489,7 +477,7 @@
               },
               "size": {
                 "width": 664,
-                "height": 80
+                "height": 40
               }
             }
           ]
@@ -525,7 +513,7 @@
               },
               "size": {
                 "width": 152,
-                "height": 36
+                "height": 40
               }
             }
           ]
@@ -533,7 +521,18 @@
         {
           "guid": "511_107292",
           "name": "maletas",
-          "colliders": []
+          "colliders": [
+            {
+              "position": {
+                "x": 28,
+                "y": 1
+              },
+              "size": {
+                "width": 314,
+                "height": 40
+              }
+            }
+          ]
         },
         {
           "guid": "685_70257",
@@ -546,7 +545,7 @@
               },
               "size": {
                 "width": 198,
-                "height": 89
+                "height": 40
               }
             }
           ]
@@ -554,7 +553,18 @@
         {
           "guid": "685_78426",
           "name": "mesa-b",
-          "colliders": []
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 175
+              },
+              "size": {
+                "width": 566,
+                "height": 40
+              }
+            }
+          ]
         },
         {
           "guid": "484_225439",
@@ -563,43 +573,59 @@
             {
               "position": {
                 "x": -1,
-                "y": 12
+                "y": 14
               },
               "size": {
                 "width": 249,
-                "height": 70
+                "height": 40
               }
             }
           ]
         },
         {
-          "guid": "627_45353",
-          "name": "estantería-c",
-          "colliders": [
-            {
-              "position": {
-                "x": -1,
-                "y": 100
-              },
-              "size": {
-                "width": 276,
-                "height": 105
-              }
-            }
-          ]
-        },
-        {
-          "guid": "484_222176",
-          "name": "silla-b",
+          "guid": "685_70257",
+          "name": "carrito",
           "colliders": [
             {
               "position": {
                 "x": 0,
-                "y": 128
+                "y": 5
               },
               "size": {
-                "width": 152,
-                "height": 36
+                "width": 198,
+                "height": 40
+              }
+            }
+          ]
+        },
+        {
+          "guid": "685_78426",
+          "name": "mesa-b",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 175
+              },
+              "size": {
+                "width": 566,
+                "height": 40
+              }
+            }
+          ]
+        },
+        {
+          "guid": "896_10275",
+          "name": "escalera",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 553
+              },
+              "size": {
+                "width": 299,
+                "height": 40
               }
             }
           ]
@@ -721,7 +747,7 @@
         {
           "symbol": "484_222176",
           "position": {
-            "x": 5326,
+            "x": 5346,
             "y": 479
           }
         },
@@ -754,17 +780,24 @@
           }
         },
         {
-          "symbol": "627_45353",
+          "symbol": "685_70257",
           "position": {
-            "x": 5834,
-            "y": 559
+            "x": 8933,
+            "y": 517
           }
         },
         {
-          "symbol": "484_222176",
+          "symbol": "685_78426",
           "position": {
-            "x": 6454,
-            "y": 470
+            "x": 5898,
+            "y": 354
+          }
+        },
+        {
+          "symbol": "896_10275",
+          "position": {
+            "x": 11259,
+            "y": 198
           }
         }
       ]
@@ -792,7 +825,7 @@
               },
               "size": {
                 "width": 566,
-                "height": 83
+                "height": 40
               }
             }
           ]
@@ -813,7 +846,7 @@
               },
               "size": {
                 "width": 210,
-                "height": 71
+                "height": 40
               }
             }
           ]
@@ -830,10 +863,10 @@
             {
               "position": {
                 "x": 0,
-                "y": 80
+                "y": 44
               },
               "size": {
-                "width": 1082,
+                "width": 1757,
                 "height": 83
               }
             }
@@ -860,7 +893,7 @@
               },
               "size": {
                 "width": 638,
-                "height": 81
+                "height": 40
               }
             }
           ]
@@ -876,11 +909,6 @@
           "colliders": []
         },
         {
-          "guid": "484_221093",
-          "name": "mesa-c",
-          "colliders": []
-        },
-        {
           "guid": "484_221096",
           "name": "mesa-a",
           "colliders": [
@@ -891,7 +919,23 @@
               },
               "size": {
                 "width": 566,
-                "height": 83
+                "height": 40
+              }
+            }
+          ]
+        },
+        {
+          "guid": "511_81492",
+          "name": "monopatín",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 13
+              },
+              "size": {
+                "width": 369,
+                "height": 40
               }
             }
           ]
@@ -936,8 +980,8 @@
         {
           "symbol": "484_221314",
           "position": {
-            "x": 0,
-            "y": 788
+            "x": -360,
+            "y": 838
           }
         },
         {
@@ -976,17 +1020,17 @@
           }
         },
         {
-          "symbol": "484_221093",
-          "position": {
-            "x": 5792,
-            "y": 810
-          }
-        },
-        {
           "symbol": "484_221096",
           "position": {
             "x": 9022,
             "y": 451
+          }
+        },
+        {
+          "symbol": "511_81492",
+          "position": {
+            "x": 5145,
+            "y": 785
           }
         }
       ]
