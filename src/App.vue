@@ -1,6 +1,6 @@
 <template>
-  <Splash v-if="!state" @start="state = true"/>
-  <Game v-else/>
+  <Splash v-if="!state" @start="state = true" />
+  <Game v-else />
 </template>
 
 <style scoped>

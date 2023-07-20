@@ -68,8 +68,11 @@ export async function start(canvas) {
 }
 
 export function stop() {
-  game.music.a.stop()
-  game.scheduler.clear()
-  Component.unregisterAll()
-  game.stop()
+  if (game) {
+    game.music.a.stop()
+    game.scheduler.clear()
+    game.stop()
+    Component.unregisterAll()
+    game = null
+  }
 }

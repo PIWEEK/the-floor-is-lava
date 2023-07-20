@@ -68,6 +68,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
   })
 
   const cat = game.resources.get('images/gato.png')
+
   const imageSheet = new ImageSheet(
     cat.width,
     cat.height,

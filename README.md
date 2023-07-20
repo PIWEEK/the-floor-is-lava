@@ -20,17 +20,35 @@ The Floor Is Lava es un juego de evitar obstáculos manejando a un gato que debe
 
 ## Instalación
 
+1. Clonamos el repositorio:
+
+```sh
+git clone https://github.com/piweek/the-floor-is-lava
+```
+
+2. Necesitamos tener instalado [pnpm](https://pnpm.io):
+
+```sh
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+```
+
+3. Instalar las dependencias:
+
 ```sh
 pnpm install
 ```
 
 ## Desarrollo
 
+Para arrancar el entorno de desarrollo:
+
 ```sh
 pnpm run dev
 ```
 
 ## Producción
+
+Para crear la versión de producción:
 
 ```sh
 pnpm run build
