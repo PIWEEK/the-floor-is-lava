@@ -9,6 +9,8 @@ export class Collision {
   #source = null
   #targetRect = null
   #sourceRect = null
+  #targetTag = null
+  #sourceTag = null
 
   /**
    * Creates a new collision identifier.
@@ -18,21 +20,27 @@ export class Collision {
    * @param {ColliderComponent} source
    * @param {Rect} targetRect
    * @param {Rect} sourceRect
+   * @param {*} targetTag
+   * @param {*} sourceTag
    */
-  constructor(id, target, source, targetRect, sourceRect) {
+  constructor(id, target, source, targetRect, sourceRect, targetTag, sourceTag) {
     this.#id = id ?? null
     this.#target = target ?? null
     this.#source = source ?? null
+    this.#targetTag = targetTag ?? null
+    this.#sourceTag = sourceTag ?? null
     this.#targetRect = targetRect ?? new Rect()
     this.#sourceRect = sourceRect ?? new Rect()
   }
 
-  set(id, target, source, targetRect, sourceRect) {
+  set(id, target, source, targetRect, sourceRect, targetTag, sourceTag) {
     this.#id = id
     this.#target = target
     this.#source = source
     this.#targetRect.copy(targetRect)
     this.#sourceRect.copy(sourceRect)
+    this.#targetTag = targetTag
+    this.#sourceTag = sourceTag
   }
 
   get id() {
@@ -45,6 +53,14 @@ export class Collision {
 
   get source() {
     return this.#source
+  }
+
+  get targetTag() {
+    return this.#targetTag
+  }
+
+  get sourceTag() {
+    return this.#sourceTag
   }
 
   get targetRect() {
@@ -64,11 +80,11 @@ export class ColliderComponent extends Component {
   #rects = null
   #collisions = new Set()
 
-  constructor(id, { tag = 0, collidesWithTag = 0, rects = [new Rect()] } = {}) {
+  constructor(id, { tag = 0, targetTag = 0, rects = [new Rect()] } = {}) {
     super(id)
     this.#rects = rects ?? [new Rect()]
     this.tag = tag ?? 0
-    this.collidesWithTag = collidesWithTag ?? 0
+    this.targetTag = targetTag ?? 0
   }
 
   get collisions() {
@@ -83,7 +99,16 @@ export class ColliderComponent extends Component {
     return this.#collisions.size > 0
   }
 
-  collidesWith(id) {
+  collidesWithTag(tag) {
+    for (const collision of this.#collisions) {
+      if (collision.targetTag === tag) {
+        return true
+      }
+    }
+    return false
+  }
+
+  collidesWithId(id) {
     for (const collision of this.#collisions) {
       if (collision.id === id) {
         return true
@@ -125,7 +150,7 @@ export class Collider {
       )
       for (let bIndex = aIndex + 1; bIndex < components.length; bIndex++) {
         const b = components[bIndex]
-        if (a.collidesWithTag !== b.tag) {
+        if (a.targetTag !== b.tag) {
           continue
         }
 
@@ -141,10 +166,10 @@ export class Collider {
 
             if (aRect.intersectsRect(bRect)) {
               const aCollision = CollisionProvider.allocate()
-              aCollision.set(b.id, b, a, bRect, aRect)
+              aCollision.set(b.id, b, a, bRect, aRect, b.tag, a.tag)
               a.collisions.add(aCollision)
               const bCollision = CollisionProvider.allocate()
-              bCollision.set(a.id, a, b, aRect, bRect)
+              bCollision.set(a.id, a, b, aRect, bRect, a.tag, b.tag)
               b.collisions.add(bCollision)
             }
           }

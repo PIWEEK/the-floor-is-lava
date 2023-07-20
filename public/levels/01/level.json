@@ -12,16 +12,19 @@
         {
           "guid": "484_220307",
           "name": "sombrero",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220325",
           "name": "cuadros-e",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220486",
           "name": "accesorios-a",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -38,46 +41,55 @@
         {
           "guid": "484_220565",
           "name": "ventana-c",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220589",
           "name": "ventana-a",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220588",
           "name": "cuadros-d",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220587",
           "name": "vinilos",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220586",
           "name": "planta-e",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_221083",
           "name": "cuadros-c",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_222112",
           "name": "planta-d",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_225295",
           "name": "ventana-b",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_225152",
           "name": "aire",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -94,11 +106,13 @@
         {
           "guid": "511_28745",
           "name": "cuadros-a",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "627_45353",
           "name": "estantería-c",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -115,6 +129,7 @@
         {
           "guid": "627_45353",
           "name": "estantería-c",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -131,21 +146,25 @@
         {
           "guid": "685_71328",
           "name": "cuadros-b",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "685_89078",
           "name": "organizador",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "831_5592",
           "name": "cámara",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "627_70720",
           "name": "estantería-b",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -162,12 +181,36 @@
         {
           "guid": "897_7024",
           "name": "charm-c",
-          "colliders": []
+          "type": "charm",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "size": {
+                "width": 55,
+                "height": 84
+              }
+            }
+          ]
         },
         {
           "guid": "897_7028",
           "name": "charm-g",
-          "colliders": []
+          "type": "charm",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "size": {
+                "width": 84,
+                "height": 62
+              }
+            }
+          ]
         }
       ],
       "instances": [
@@ -330,6 +373,7 @@
         {
           "guid": "484_220246",
           "name": "armario",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -356,6 +400,7 @@
         {
           "guid": "484_220281",
           "name": "bicicleta",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -372,6 +417,7 @@
         {
           "guid": "484_220353",
           "name": "banco",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -388,16 +434,19 @@
         {
           "guid": "484_220378",
           "name": "planta-f",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220389",
           "name": "puerta-a",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220520",
           "name": "nevera",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -414,6 +463,7 @@
         {
           "guid": "484_220551",
           "name": "silla-c",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -430,6 +480,7 @@
         {
           "guid": "484_220861",
           "name": "tocadiscos",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -456,6 +507,7 @@
         {
           "guid": "484_220862",
           "name": "sillón",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -472,11 +524,13 @@
         {
           "guid": "484_220870",
           "name": "planta-a",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220869",
           "name": "sofá",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -493,26 +547,31 @@
         {
           "guid": "484_220868",
           "name": "guitarra",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220867",
           "name": "estantería-a",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220866",
           "name": "planta-b",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_222151",
           "name": "planta-c",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_222176",
           "name": "silla-b",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -529,6 +588,7 @@
         {
           "guid": "511_107292",
           "name": "maletas",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -545,6 +605,7 @@
         {
           "guid": "685_70257",
           "name": "carrito",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -561,6 +622,7 @@
         {
           "guid": "685_78426",
           "name": "mesa-b",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -577,6 +639,7 @@
         {
           "guid": "484_225439",
           "name": "radiador",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -593,6 +656,7 @@
         {
           "guid": "685_70257",
           "name": "carrito",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -609,6 +673,7 @@
         {
           "guid": "685_78426",
           "name": "mesa-b",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -625,6 +690,7 @@
         {
           "guid": "896_10275",
           "name": "escalera",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -641,26 +707,75 @@
         {
           "guid": "897_7026",
           "name": "charm-e",
-          "colliders": []
+          "type": "charm",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "size": {
+                "width": 98,
+                "height": 67
+              }
+            }
+          ]
         },
         {
           "guid": "897_7027",
           "name": "charm-f",
-          "colliders": []
+          "type": "charm",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "size": {
+                "width": 132,
+                "height": 55
+              }
+            }
+          ]
         },
         {
           "guid": "897_7025",
           "name": "charm-d",
-          "colliders": []
+          "type": "charm",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "size": {
+                "width": 116,
+                "height": 72
+              }
+            }
+          ]
         },
         {
           "guid": "897_7023",
           "name": "charm-b",
-          "colliders": []
+          "type": "charm",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "size": {
+                "width": 55,
+                "height": 55
+              }
+            }
+          ]
         },
         {
           "guid": "484_220419",
           "name": "cocina",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -884,11 +999,13 @@
         {
           "guid": "484_221097",
           "name": "silla-d",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_221096",
           "name": "mesa-a",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -905,11 +1022,13 @@
         {
           "guid": "484_221095",
           "name": "lámpara-b",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_221094",
           "name": "lámpara-a",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -926,11 +1045,13 @@
         {
           "guid": "484_221093",
           "name": "mesa-c",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_221314",
           "name": "alfombra-a",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -947,16 +1068,19 @@
         {
           "guid": "484_221407",
           "name": "alfombra-b",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "484_220412",
           "name": "alfombra-c",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "511_36378",
           "name": "isla",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -973,11 +1097,13 @@
         {
           "guid": "685_78427",
           "name": "silla-e",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "511_81492",
           "name": "monopatín",
+          "type": "solid",
           "colliders": [
             {
               "position": {
@@ -994,7 +1120,19 @@
         {
           "guid": "897_7022",
           "name": "charm-a",
-          "colliders": []
+          "type": "charm",
+          "colliders": [
+            {
+              "position": {
+                "x": 0,
+                "y": 0
+              },
+              "size": {
+                "width": 137,
+                "height": 43
+              }
+            }
+          ]
         }
       ],
       "instances": [
@@ -1094,26 +1232,31 @@
         {
           "guid": "669_22527",
           "name": "silueta-mesa",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "669_22528",
           "name": "silueta-silla",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "669_22529",
           "name": "silueta-guitarra",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "669_22532",
           "name": "silueta-sofá",
+          "type": "solid",
           "colliders": []
         },
         {
           "guid": "669_22533",
           "name": "silueta-comedor",
+          "type": "solid",
           "colliders": []
         }
       ],

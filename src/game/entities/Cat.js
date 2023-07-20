@@ -55,7 +55,7 @@ function createAnimationRects(source, numRects = CAT_ANIMATION_FRAMES) {
 /**
  * Cat.
  */
-export function* Cat(game, parentVelocity, parentTransform, gameState) {
+export function* Cat(game, gameState, parentVelocity, parentTransform) {
   const transform = new TransformComponent('cat', {
     x: CAT_INITIAL_X,
     y: CAT_INITIAL_Y,
@@ -64,7 +64,7 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
   const collider = new ColliderComponent('cat', {
     rects: [new Rect(0, 0, 180, 40)],
     tag: CollisionTag.CAT,
-    collidesWithTag: CollisionTag.SOLID
+    targetTag: CollisionTag.SOLID
   })
 
   const cat = game.resources.get('images/gato.png')
@@ -173,24 +173,13 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
             animation.frame = ANIMATION_JUMP__FALLING
           }
         }
-        /*
-        if (collider.hasCollided) {
-          const [id] = collider.collisions
-          const collisionTransform = Component.findByIdAndConstructor(id, TransformComponent)
-          const collisionCollider = Component.findByIdAndConstructor(id, ColliderComponent)
-          if (collisionCollider.tag === CollisionTag.SOLID) { // SOLID
-            // Hacemos una cosa
-          } else if (collisionCollider.tag === CollisionTag.POISON) { // POISON
 
-          } else if (collisionCollider.tag === CollisionTag.MOVABLE) { // MOVABLE
-
-          } else if (collisionCollider.tag === CollisionTag.CHARM) { // CHARM
-
-          }
+        if (collider.collidesWithTag(CollisionTag.END)) {
+          gameState.isEnded = true
+          break
         }
-        */
 
-        if (collider.hasCollided) {
+        if (collider.collidesWithTag(CollisionTag.SOLID)) {
           const [collision] = collider.collisions
 
           if (debugCollisionRect) {
@@ -221,13 +210,13 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
           }
         }
 
-        if (!collider.hasCollided) {
+        if (!collider.collidesWithTag(CollisionTag.SOLID)) {
           if (debugCollisionRect) {
             debugCollisionRect.rect.reset()
           }
         }
 
-        if (!collider.hasCollided && transform.position.y < LAVA_Y) {
+        if (!collider.collidesWithTag(CollisionTag.SOLID) && transform.position.y < LAVA_Y) {
           if (!isJumping) {
             isJumping = true
             velocity.reset()
@@ -267,6 +256,13 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
       yield
     }
 
+    while (transform.position.y < LAVA_Y) {
+      velocity.y += GRAVITY
+      transform.position.add(velocity)
+      yield
+    }
+    transform.position.y = LAVA_Y
+
     /**
      * Cuando salimos del bucle principal, entramos
      * en el bucle de animación de daño.
@@ -274,22 +270,28 @@ export function* Cat(game, parentVelocity, parentTransform, gameState) {
     animation.set(CatAnimation.WALK)
     velocity.reset()
     while (transform.position.x < game.viewport.currentWidth) {
-      velocity.x += 1
+      if (gameState.isEnded) {
+        velocity.x += 0.1
+      } else {
+        velocity.x += 1
+      }
       transform.position.add(velocity)
       animation.animate()
       image.rect.copy(imageSheet.rectOf(animation.currentFrame))
       yield
     }
 
-    isDamaged = false
-    isRunning = false
-    isJumping = true
-    isMeowing = false
-    animation.set(CatAnimation.JUMP, 4)
-    velocity.reset()
-    transform.position.set(CAT_INITIAL_X, CAT_INITIAL_Y)
-    parentTransform.position.x = 0
-    parentVelocity.x = -4
+    if (!gameState.isEnded) {
+      isDamaged = false
+      isRunning = false
+      isJumping = true
+      isMeowing = false
+      animation.set(CatAnimation.JUMP, 4)
+      velocity.reset()
+      transform.position.set(CAT_INITIAL_X, CAT_INITIAL_Y)
+      parentTransform.position.x = 0
+      parentVelocity.x = -4
+    }
 
     yield
   }
