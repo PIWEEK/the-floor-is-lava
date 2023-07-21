@@ -91,6 +91,7 @@ export async function * Level(game, levelIndex) {
     }
     if (index === LEVEL_CAT_LAYER) {
       cat = Cat(game, gameState, velocity, transform)
+      cat.next()
     }
   }
 
