@@ -67,7 +67,7 @@ export function* Cat(game, gameState, parentVelocity, parentTransform) {
     targetTag: CollisionTag.SOLID
   })
 
-  const cat = game.resources.get('images/gato.png')
+  const cat = game.resources.get('images/gato.png?taoro:as=imagebitmap')
 
   const imageSheet = new ImageSheet(
     cat.width,
@@ -177,6 +177,7 @@ export function* Cat(game, gameState, parentVelocity, parentTransform) {
 
         if (collider.collidesWithTag(CollisionTag.END)) {
           gameState.isEnded = true
+          gameState.endStart = performance.now()
           break
         }
 

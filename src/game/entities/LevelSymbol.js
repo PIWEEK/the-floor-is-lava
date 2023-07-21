@@ -27,7 +27,9 @@ export function * LevelSymbol(game, gameState, parentTransform, instance, symbol
     y: instance.position.y,
   })
 
-  const source = game.resources.get(`levels/${levelId}/symbols/${symbol.name}.png`)
+  const source = game.resources.get(
+    `levels/${levelId}/symbols/${symbol.name}.png?taoro:as=imagebitmap`
+  )
   const image = new ImageComponent(id, {
     source
   })
@@ -53,7 +55,7 @@ export function * LevelSymbol(game, gameState, parentTransform, instance, symbol
     targetTag: CollisionTag.CAT,
   })
 
-  let alive = true, charmIndex = 0
+  let alive = true, charmX = 0, charmIndex = 0
   while (alive) {
     if (symbol.type === SymbolType.CHARM) {
       if (collider.collidesWithTag(CollisionTag.CAT)) {
@@ -66,16 +68,35 @@ export function * LevelSymbol(game, gameState, parentTransform, instance, symbol
 
   const initialPosition = transform.position.clone()
 
+  charmX = gameState.charmX
   charmIndex = gameState.charms
+  gameState.charmX += source.width + 20
   gameState.charms++
 
+  game.sound.play(game.resources.get('sounds/twinkle.mp3?taoro:as=audiobuffer'), {
+    playbackRate: 3
+  })
+
   const charmPosition = new Point(
-    20 + charmIndex * 150, 20
+    20 + charmX, 20
   )
 
   let startTime = performance.now()
+  let isEnded = false
   while (true) {
-    let currentTime = performance.now() - startTime
+    if (gameState.isEnded) {
+      if (!isEnded) {
+        isEnded = true
+        startTime = gameState.endStart + 3000 + (charmIndex * 400)
+        initialPosition.copy(transform.position)
+        charmPosition.set(
+          ((1920 - gameState.charmX) / 2 + charmX),
+          640
+        )
+      }
+    }
+
+    let currentTime = Math.max(0, performance.now() - startTime)
     let delta = quadratic(Math.min(1, currentTime / 400), 0, 1, 1)
     transform.position.set(
       linear(delta, initialPosition.x, charmPosition.x),

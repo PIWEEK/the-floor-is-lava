@@ -643,8 +643,8 @@
           "colliders": [
             {
               "position": {
-                "x": -1,
-                "y": 14
+                "x": 0,
+                "y": 8
               },
               "size": {
                 "width": 249,
@@ -780,7 +780,7 @@
             {
               "position": {
                 "x": 0,
-                "y": 131
+                "y": 94
               },
               "size": {
                 "width": 1262,

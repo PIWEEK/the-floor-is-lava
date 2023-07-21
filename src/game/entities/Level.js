@@ -25,7 +25,9 @@ export async function * Level(game, levelIndex) {
   const velocity = new Point(LEVEL_SPEED, 0)
   const gameState = {
     charms: 0,
+    charmX: 0,
     pauseStart: 0,
+    endStart: 0,
     isEnded: false,
     isPaused: false,
   }
@@ -35,11 +37,12 @@ export async function * Level(game, levelIndex) {
     y: 0,
   })
 
+  game.resources.load('sounds/twinkle.mp3?taoro:as=audiobuffer')
   game.resources.load('sounds/meowch.wav?taoro:as=audiobuffer')
   game.resources.load('sounds/meow.wav?taoro:as=audiobuffer')
   game.resources.load('sounds/meowbrrr.wav?taoro:as=audiobuffer')
   game.resources.load('sounds/hiss.mp3?taoro:as=audiobuffer')
-  game.resources.load('images/gato.png')
+  game.resources.load('images/gato.png?taoro:as=imagebitmap')
 
   // Cargamos el archivo de nivel.
   await game.resources.load(`levels/${levelId}/level.json`)
@@ -49,21 +52,23 @@ export async function * Level(game, levelIndex) {
     `levels/${levelId}/level.json`
   )
   game.resources.load(`levels/${levelId}/${music}?taoro:as=audiobuffer`)
-  game.resources.load(`levels/${levelId}/${background}`)
+  game.resources.load(`levels/${levelId}/${background}?taoro:as=imagebitmap`)
   // Cargamos todos los símbolos del nivel.
   for (const layer of layers) {
     for (const symbol of layer.symbols) {
-      game.resources.load(`levels/${levelId}/symbols/${symbol.name}.png`)
+      game.resources.load(`levels/${levelId}/symbols/${symbol.name}.png?taoro:as=imagebitmap`)
     }
   }
 
   // Esperamos a que todo se cargue.
-  await game.resources.all()
+  console.log(await game.resources.all())
 
   // Añadimos los componentes de la imagen de fondo.
   const backgroundTransform = new TransformComponent('background')
   const backgroundImage = new ImageComponent('background', {
-    source: game.resources.get(`levels/${levelId}/${background}`),
+    source: game.resources.get(
+      `levels/${levelId}/${background}?taoro:as=imagebitmap`
+    ),
   })
 
   // Aquí creamos todos los elementos del nivel a partir de las capas
@@ -86,6 +91,12 @@ export async function * Level(game, levelIndex) {
     if (index === LEVEL_CAT_LAYER) {
       game.scheduler.add(Cat(game, gameState, velocity, transform))
     }
+  }
+
+  let frameCount = 0
+  while (frameCount < 60) {
+    frameCount++
+    yield
   }
 
   // Arrancamos la música.

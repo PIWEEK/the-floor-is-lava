@@ -1,6 +1,7 @@
+import { linear, quadratic } from '@taoro/math-interpolation'
 import { Rect } from '@taoro/math-rect'
 import { TransformComponent } from "@taoro/component-transform-2d"
-import { RectComponent } from "@taoro/renderer-2d"
+import { TextComponent, RectComponent } from "@taoro/renderer-2d"
 import { ColliderComponent } from '~/game/systems/Collider'
 import { CollisionTag } from '~/game/constants/CollisionTag'
 
@@ -21,6 +22,20 @@ export function* LevelEnd(game, gameState, parentTransform, parentVelocity, x, p
     targetTag: CollisionTag.CAT,
   })
 
+  const textTransform = new TransformComponent('end-text', {
+    x: 1920 / 2,
+    y: 2000,
+  })
+
+  const text = new TextComponent('end-text', {
+    text: 'THE END',
+    textAlign: 'center',
+    textBaseline: 'middle',
+    font: '200px corben',
+    fillStyle: '#FFD2C6',
+    alpha: 0,
+  })
+
   while (true) {
     if (gameState.isEnded) {
       if (transform.position.x > 0) {
@@ -29,6 +44,11 @@ export function* LevelEnd(game, gameState, parentTransform, parentVelocity, x, p
           transform.position.x = 0
         }
       }
+
+      const delta = Math.max(0, Math.min(1, (performance.now() - gameState.endStart) / 3000))
+      textTransform.position.y = quadratic(delta, 2000, 540, 540)
+      text.alpha = delta
+
     } else {
       transform.position.x = parentTransform.position.x * parallax + x
     }
