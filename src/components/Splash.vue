@@ -4,10 +4,13 @@
     <div class="buttons">
       <button class="start button" @click="onPlay">Play</button>
       <!-- <button class="reload button" @click="emit('start')">Restart</button> -->
-      <div class="sound-control">
+      <div class="options">
         <button @click="music = !music">
           <VolumeOn v-if="music" />
           <VolumeOff v-else />
+        </button>
+        <button v-if="fullscreenEnabled" @click="onFullscreen">
+          <Fullscreen />
         </button>
       </div>
     </div>
@@ -84,7 +87,12 @@ h1 {
   color: #FFF;
 }
 
-.sound-control svg {
+.options {
+  display: flex;
+  gap: 2rem;
+}
+
+.options svg {
   font-size: 4rem;
   stroke: #FFEFDF;
   fill: none;
@@ -93,11 +101,11 @@ h1 {
   width: 2.5rem;
 }
 
-.sound-control svg:hover {
+.options svg:hover {
   stroke: #FFF;
 }
 
-.sound-control button {
+.options button {
   border: none;
   background-color: transparent;
 }
@@ -121,9 +129,10 @@ h1 {
 </style>
 
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import VolumeOff from '~/components/icons/VolumeOff.vue'
 import VolumeOn from '~/components/icons/VolumeOn.vue'
+import Fullscreen from '~/components/icons/Fullscreen.vue'
 import SplashKeyboard from '~/components/SplashKeyboard.vue'
 import SplashTouch from '~/components/SplashTouch.vue'
 
@@ -135,6 +144,16 @@ const music = ref(localStorage.getItem('music') === 'true' ?? true)
 watch(music, (newValue, oldValue) => {
   localStorage.setItem('music', newValue)
 })
+
+const fullscreenEnabled = computed(() => document.fullscreenEnabled)
+
+function onFullscreen() {
+  if (document.fullscreenElement) {
+    document.exitFullscreen()
+  } else {
+    document.body.requestFullscreen()
+  }
+}
 
 function onPlay() {
   transition.value = 'out'
