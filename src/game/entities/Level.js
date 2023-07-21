@@ -73,7 +73,8 @@ export async function * Level(game, levelIndex) {
 
   // Aquí creamos todos los elementos del nivel a partir de las capas
   // que hemos creado con el exportador. De momento hay cuatro capas
-  // que se identifican por: `siluetas`, `primer plano`, `
+  // que se identifican por: `siluetas`, `primer plano`
+  let cat = null
   for (let index = 0; index < LEVEL_MAX_LAYERS; index++) {
     const layer = layers[index]
     if (index === LEVEL_END_LAYER) {
@@ -89,12 +90,14 @@ export async function * Level(game, levelIndex) {
       )
     }
     if (index === LEVEL_CAT_LAYER) {
-      game.scheduler.add(Cat(game, gameState, velocity, transform))
+      cat = Cat(game, gameState, velocity, transform)
     }
   }
 
+  // FIXME: Esto arregla una condición de carrera que todavía no tengo
+  // ni idea de por qué sucede.
   let frameCount = 0
-  while (frameCount < 60) {
+  while (frameCount < 90) {
     frameCount++
     yield
   }
@@ -105,6 +108,7 @@ export async function * Level(game, levelIndex) {
   )
   game.music.a.start()
 
+  game.scheduler.add(cat)
   transform.position.reset()
   velocity.set(LEVEL_SPEED, 0)
   // Bucle principal del juego que se encargará de actualizar la posición
