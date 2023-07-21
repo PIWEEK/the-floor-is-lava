@@ -188,7 +188,11 @@ export function* Cat(game, gameState, parentVelocity, parentTransform) {
             debugCollisionRect.rect.copy(collision.targetRect)
           }
 
-          if (velocity.y > 0) {
+          if (collision.targetRect.bottom < collision.sourceRect.top) {
+            velocity.y += GRAVITY
+          }
+
+          if (velocity.y > 0 && collision.targetRect.bottom > collision.sourceRect.top) {
             velocity.reset()
 
             // FIXME: Aquí hay algo MUY raro que hace que las colisiones
@@ -210,25 +214,23 @@ export function* Cat(game, gameState, parentVelocity, parentTransform) {
               }
             }
           }
-        }
-
-        if (!collider.collidesWithTag(CollisionTag.SOLID)) {
+        } else {
           if (debugCollisionRect) {
             debugCollisionRect.rect.reset()
           }
-        }
 
-        if (!collider.collidesWithTag(CollisionTag.SOLID) && transform.position.y < LAVA_Y) {
-          if (!isJumping) {
-            isJumping = true
-            velocity.reset()
-            animation.set(CatAnimation.JUMP, ANIMATION_JUMP__FALLING)
+          if (transform.position.y < LAVA_Y) {
+            if (!isJumping) {
+              isJumping = true
+              velocity.reset()
+              animation.set(CatAnimation.JUMP, ANIMATION_JUMP__FALLING)
+            }
+            // Aplicamos la gravedad del juego.
+            if (isJumping && animation.frame >= ANIMATION_JUMP__FLOATING && transform.position.y > LAVA_Y - 50) {
+              animation.frame = ANIMATION_JUMP__LANDING
+            }
+            velocity.y += GRAVITY
           }
-          // Aplicamos la gravedad del juego.
-          if (isJumping && animation.frame >= ANIMATION_JUMP__FLOATING && transform.position.y > LAVA_Y - 50) {
-            animation.frame = ANIMATION_JUMP__LANDING
-          }
-          velocity.y += GRAVITY
         }
 
         if (transform.position.y >= LAVA_Y) {
