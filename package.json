@@ -15,7 +15,7 @@
   "dependencies": {
     "@taoro/audio": "^1.0.2",
     "@taoro/audio-channel": "^1.0.2",
-    "@taoro/collider-nano-2d": "^1.0.4",
+    "@taoro/collider-nano-2d": "^1.0.5",
     "@taoro/component": "^1.0.2",
     "@taoro/component-transform-2d": "^1.0.2",
     "@taoro/game": "^1.0.2",
@@ -26,12 +26,12 @@
     "@taoro/math-rect": "^1.0.2",
     "@taoro/pool": "^1.0.2",
     "@taoro/renderer-2d": "^1.0.3",
-    "@taoro/scheduler": "^1.0.3",
+    "@taoro/scheduler": "^1.0.4",
     "@taoro/viewport": "^1.0.2",
     "vue": "^3.3.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
-    "vite": "^4.4.4"
+    "vite": "^4.4.6"
   }
 }

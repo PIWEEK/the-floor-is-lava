@@ -93,14 +93,6 @@ export async function * Level(game, levelIndex) {
     }
   }
 
-  // FIXME: Esto arregla una condición de carrera que todavía no tengo
-  // ni idea de por qué sucede.
-  let frameCount = 0
-  while (frameCount < 90) {
-    frameCount++
-    yield
-  }
-
   // Arrancamos la música.
   game.music.a.buffer = game.resources.get(
     `levels/${levelId}/${music}?taoro:as=audiobuffer`
